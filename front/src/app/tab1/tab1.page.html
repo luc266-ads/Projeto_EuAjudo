@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+ <div class="cardInicial">
+    <ion-card id="cardLogo">
+      <img id="logo" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title id="logoTipo">Cadastro </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <br>
+  <ion-card id="cardTitle">
+    <ion-card-header>
+      <ion-card-title id="title">Preenchar o campos abaixo: </ion-card-title>
+    </ion-card-header>
+
+
+    <div id="login">
+      <ion-card-content>
+
+        <div id="InputCor">
+          <ion-input label="Nome:" fill="outline" placeholder="Seu Nome" [(ngModel)]="nome"></ion-input>
+        </div>
+
+        <div id="InputCor">
+          <ion-input label="Email:" fill="outline" type="password" placeholder="Ex: jo*****@gmail.com"
+            maxlength="15" [(ngModel)]="email" ></ion-input>
+        </div>
+        <div id="InputCor">
+          <ion-input label="CPF" fill="outline" placeholder="Ex: 000.000.000-00" maxlength="15" [(ngModel)]="cpf" ></ion-input>
+        </div>
+        <div id="InputCor">
+          <ion-input label="Senha:" fill="outline" type="password" placeholder="Digite sua Senha"
+            maxlength="15" [(ngModel)]="senha" ></ion-input>
+        </div>
+        <div id="InputCor">
+          <ion-input label="Confirma Senha:" fill="outline" type="password" placeholder="Confirma sua Senha"
+            maxlength="15" [(ngModel)]="confirmaSenha" ></ion-input>
+        </div>
+
+        <div class="checkbox">
+          <ion-checkbox></ion-checkbox>
+          
+            <p id = "checkboxContent"> Você aceitar que as perguntas do jogo seja de acordo com sua idade ?</p>
+          
+        </div>
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+
+  <div class="botaoLogin">
+    <button id="botaoSaiba" > Voltar</button>
+    <button id="botaoSaiba" (click) = "enviar()"> Proximo</button>
+  </div>
+ 
+  
+  <style>
+    ion-checkbox {
+      --size: 25px;
+      --checkbox-background-checked: rgb(0, 60, 255);
+    }
+
+    ion-checkbox::part(container) {
+      border-radius: 6px;
+      border: 2px solid #ffffff;
+    }
+  </style>
+
+  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
+
+
+</ion-content>

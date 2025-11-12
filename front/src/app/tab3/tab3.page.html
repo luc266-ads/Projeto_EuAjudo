@@ -1,0 +1,879 @@
+<ion-toolbar>
+  <div class="toolbar">
+    <ion-button fill="clear" class="menubotao" (click)=EncontroLeft()>Menu</ion-button>
+    <div id="titleToolbar">
+      <h1>Encontros</h1>
+    </div>
+  </div>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="menuEncontro" class="panel left-panel slide-in-left">
+    <div>
+      <ion-button fill="clear" expand="block">Informação</ion-button>
+      <hr>
+      <ion-button fill="clear" expand="block">Quem Somos</ion-button>
+      <hr>
+      <ion-button fill="clear" expand="block">O Programa</ion-button>
+      <hr>
+      <ion-button fill="clear" expand="block">Sair</ion-button>
+      <hr>
+    </div>
+  </div>
+  <div *ngIf="sugestaoOk" id="sugestaoOk">
+    <div id="sugestaoContet">
+      <h3>Ideia Enviada com <span class="azul">SUCESSO!!</span></h3>
+      <button id="botaoSugestão" (click)="voltarSusgetao()"> Voltar</button>
+    </div>
+
+  </div>
+  <div class="buscarCidade" *ngIf="buscarCidade">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" [(ngModel)]="nome"></ion-searchbar>
+
+    <ion-list lines="none" [inset]="true">
+
+      <ion-item (click)="cidadeA0()">
+        <ion-label> {{ results[0]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA1()">
+        <ion-label> {{ results[1]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA2()">
+        <ion-label> {{ results[2]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA2()">
+        <ion-label> {{ results[3]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA4()">
+        <ion-label> {{ results[4]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA5()">
+        <ion-label> {{ results[5]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA6()">
+        <ion-label> {{ results[6]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA7()">
+        <ion-label> {{ results[7]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA8()">
+        <ion-label> {{ results[8]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA9()">
+        <ion-label> {{ results[9]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA10()">
+        <ion-label> {{ results[10]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA11()">
+        <ion-label> {{ results[11]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA12()">
+        <ion-label> {{ results[12]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA13()">
+        <ion-label> {{ results[13]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeA14()">
+        <ion-label> {{ results[14]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE B0 //////// -->
+
+      <ion-item (click)="cidadeB15()">
+        <ion-label> {{ results[15]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB16()">
+        <ion-label> {{ results[16]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB17()">
+        <ion-label> {{ results[17]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB18()">
+        <ion-label> {{ results[18]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB19()">
+        <ion-label> {{ results[19]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB20()">
+        <ion-label> {{ results[20]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB21()">
+        <ion-label> {{ results[21]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB22()">
+        <ion-label> {{ results[22]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB23()">
+        <ion-label> {{ results[23]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB24()">
+        <ion-label> {{ results[24]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB25()">
+        <ion-label> {{ results[25]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB26()">
+        <ion-label> {{ results[26]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB27()">
+        <ion-label> {{ results[27]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB28()">
+        <ion-label> {{ results[28]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB29()">
+        <ion-label> {{ results[29]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeB30()">
+        <ion-label> {{ results[30]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE C0 //////// -->
+      <ion-item (click)="cidadeC31()">
+        <ion-label> {{ results[31]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC32()">
+        <ion-label> {{ results[32]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC33()">
+        <ion-label> {{ results[33]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC34()">
+        <ion-label> {{ results[34]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC35()">
+        <ion-label> {{ results[35]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC36()">
+        <ion-label> {{ results[36]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC37()">
+        <ion-label> {{ results[37]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC38()">
+        <ion-label> {{ results[38]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC39()">
+        <ion-label> {{ results[39]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC40()">
+        <ion-label> {{ results[40]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC41()">
+        <ion-label> {{ results[41]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC42()">
+        <ion-label> {{ results[42]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC43()">
+        <ion-label> {{ results[43]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC44()">
+        <ion-label> {{ results[44]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC45()">
+        <ion-label> {{ results[45]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC46()">
+        <ion-label> {{ results[46]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC47()">
+        <ion-label> {{ results[47]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC48()">
+        <ion-label> {{ results[48]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC49()">
+        <ion-label> {{ results[49]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC50()">
+        <ion-label> {{ results[50]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC51()">
+        <ion-label> {{ results[51]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC52()">
+        <ion-label> {{ results[52]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC53()">
+        <ion-label> {{ results[53]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC54()">
+        <ion-label> {{ results[54]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC55()">
+        <ion-label> {{ results[55]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeC56()">
+        <ion-label> {{ results[56]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE D0 //////// -->
+
+      <ion-item (click)="cidadeD57()">
+        <ion-label> {{ results[57]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE E0 //////// -->
+
+      <ion-item (click)="cidadeE58()">
+        <ion-label> {{ results[58]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeE59()">
+        <ion-label> {{ results[59]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE F0 //////// -->
+
+      <ion-item (click)="cidadeF60()">
+        <ion-label> {{ results[60]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeF61()">
+        <ion-label> {{ results[61]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeF62()">
+        <ion-label> {{ results[62]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeF63()">
+        <ion-label> {{ results[63]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeF64()">
+        <ion-label> {{ results[64]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeF65()">
+        <ion-label> {{ results[65]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE G0 //////// -->
+
+      <ion-item (click)="cidadeG66()">
+        <ion-label> {{ results[66]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeG67()">
+        <ion-label> {{ results[67]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeG68()">
+        <ion-label> {{ results[68]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeG69()">
+        <ion-label> {{ results[69]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeG70()">
+        <ion-label> {{ results[70]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeG71()">
+        <ion-label> {{ results[71]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE I0 //////// -->
+      <ion-item (click)="cidadeI72()">
+        <ion-label> {{ results[72]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI73()">
+        <ion-label> {{ results[73]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI74()">
+        <ion-label> {{ results[74]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI75()">
+        <ion-label> {{ results[75]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI76()">
+        <ion-label> {{ results[76]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI77()">
+        <ion-label> {{ results[77]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI78()">
+        <ion-label> {{ results[78]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI79()">
+        <ion-label> {{ results[79]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI80()">
+        <ion-label> {{ results[80]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI81()">
+        <ion-label> {{ results[81]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI82()">
+        <ion-label> {{ results[82]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI83()">
+        <ion-label> {{ results[83]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI84()">
+        <ion-label> {{ results[84]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI85()">
+        <ion-label> {{ results[85]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI86()">
+        <ion-label> {{ results[86]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeI87()">
+        <ion-label> {{ results[87]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE J0 //////// -->
+
+      <ion-item (click)="cidadeJ88()">
+        <ion-label> {{ results[88]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ89()">
+        <ion-label> {{ results[89]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ90()">
+        <ion-label> {{ results[90]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ91()">
+        <ion-label> {{ results[91]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ92()">
+        <ion-label> {{ results[92]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ93()">
+        <ion-label> {{ results[93]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ94()">
+        <ion-label> {{ results[94]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ95()">
+        <ion-label> {{ results[95]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeJ96()">
+        <ion-label> {{ results[96]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE L0 //////// -->
+
+      <ion-item (click)="cidadeL97()">
+        <ion-label> {{ results[97]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeL98()">
+        <ion-label> {{ results[98]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeL99()">
+        <ion-label> {{ results[99]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeL100()">
+        <ion-label> {{ results[100]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeL101()">
+        <ion-label> {{ results[101]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeL102()">
+        <ion-label> {{ results[102]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeL103()">
+        <ion-label> {{ results[103]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE M0 //////// -->
+
+      <ion-item (click)="cidadeM104()">
+        <ion-label> {{ results[104]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeM105()">
+        <ion-label> {{ results[105]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeM106()">
+        <ion-label> {{ results[106]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeM107()">
+        <ion-label> {{ results[107]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeM108()">
+        <ion-label> {{ results[108]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeM109()">
+        <ion-label> {{ results[109]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeM110()">
+        <ion-label> {{ results[110]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE N0 //////// -->
+
+      <ion-item (click)="cidadeN111()">
+        <ion-label> {{ results[111]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE O0 //////// -->
+
+      <ion-item (click)="cidadeO112()">
+        <ion-label> {{ results[112]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeO113()">
+        <ion-label> {{ results[113]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeO114()">
+        <ion-label> {{ results[114]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeO115()">
+        <ion-label> {{ results[115]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE P0 //////// -->
+
+      <ion-item (click)="cidadeP116()">
+        <ion-label> {{ results[116]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP117()">
+        <ion-label> {{ results[117]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP118()">
+        <ion-label> {{ results[118]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP119()">
+        <ion-label> {{ results[119]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP120()">
+        <ion-label> {{ results[120]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP121()">
+        <ion-label> {{ results[121]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP122()">
+        <ion-label> {{ results[122]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP123()">
+        <ion-label> {{ results[123]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP124()">
+        <ion-label> {{ results[124]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP125()">
+        <ion-label> {{ results[125]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP126()">
+        <ion-label> {{ results[126]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP127()">
+        <ion-label> {{ results[127]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP128()">
+        <ion-label> {{ results[128]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP129()">
+        <ion-label> {{ results[129]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeP130()">
+        <ion-label> {{ results[130]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE Q0 //////// -->
+      <ion-item (click)="cidadeQ131()">
+        <ion-label> {{ results[131]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeQ132()">
+        <ion-label> {{ results[132]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE R0 //////// -->
+      <ion-item (click)="cidadeR133()">
+        <ion-label> {{ results[133]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeR134()">
+        <ion-label> {{ results[134]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeR135()">
+        <ion-label> {{ results[153]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeR136()">
+        <ion-label> {{ results[136]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE S0 //////// -->
+
+      <ion-item (click)="cidadeS137()">
+        <ion-label> {{ results[137]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS138()">
+        <ion-label> {{ results[138]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS139()">
+        <ion-label> {{ results[139]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS140()">
+        <ion-label> {{ results[140]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS141()">
+        <ion-label> {{ results[141]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS142()">
+        <ion-label> {{ results[142]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS143()">
+        <ion-label> {{ results[143]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS144()">
+        <ion-label> {{ results[144]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS145()">
+        <ion-label> {{ results[145]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS146()">
+        <ion-label> {{ results[146]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS147()">
+        <ion-label> {{ results[147]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS148()">
+        <ion-label> {{ results[148]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS149()">
+        <ion-label> {{ results[149]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS150()">
+        <ion-label> {{ results[150]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS151()">
+        <ion-label> {{ results[151]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS152()">
+        <ion-label> {{ results[152]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS153()">
+        <ion-label> {{ results[153]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS154()">
+        <ion-label> {{ results[154]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS155()">
+        <ion-label> {{ results[155]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS156()">
+        <ion-label> {{ results[156]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS157()">
+        <ion-label> {{ results[157]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS158()">
+        <ion-label> {{ results[158]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS159()">
+        <ion-label> {{ results[159]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS160()">
+        <ion-label> {{ results[160]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS161()">
+        <ion-label> {{ results[161]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS162()">
+        <ion-label> {{ results[162]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS163()">
+        <ion-label> {{ results[163]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeS164()">
+        <ion-label> {{ results[164]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE T0 //////// -->
+
+      <ion-item (click)="cidadeT165()">
+        <ion-label> {{ results[165]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT166()">
+        <ion-label> {{ results[166]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT167()">
+        <ion-label> {{ results[167]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT168()">
+        <ion-label> {{ results[168]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT169()">
+        <ion-label> {{ results[169]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT170()">
+        <ion-label> {{ results[170]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT171()">
+        <ion-label> {{ results[171]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT172()">
+        <ion-label> {{ results[172]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT173()">
+        <ion-label> {{ results[173]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT174()">
+        <ion-label> {{ results[174]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT175()">
+        <ion-label> {{ results[175]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT176()">
+        <ion-label> {{ results[176]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT177()">
+        <ion-label> {{ results[177]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeT178()">
+        <ion-label> {{ results[178]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE V0 //////// -->
+      <ion-item (click)="cidadeV179()">
+        <ion-label> {{ results[179]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeV180()">
+        <ion-label> {{ results[180]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeV181()">
+        <ion-label> {{ results[181]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeV182()">
+        <ion-label> {{ results[182]}}</ion-label>
+      </ion-item>
+      <ion-item (click)="cidadeV183()">
+        <ion-label> {{ results[183]}}</ion-label>
+      </ion-item>
+
+      <!-- ////// CIDADE X0 //////// -->
+      <ion-item (click)="cidadeX184()">
+        <ion-label> {{ results[184]}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="bodySugestao left-panel slide-in-left" [ngStyle]="bodySugestaoStyle" *ngIf="bodySugestao">
+
+    <br>
+    <br>
+    <br>
+
+    <div class="minhaSugestao">
+      <h1 id="titleSugestao">Deixe a Sua Sugestao de Melhoria</h1>
+      <div id="dataEncontro">
+        <h1 id="subtitleSugestao">Escreva sua Sugestão</h1>
+      </div>
+
+      <ion-card color="secondary">
+        <ion-card-content>
+          <div id="InputCor">
+            <ion-input label="Sugestao:" fill="outline" placeholder="Digite aqui"
+              [(ngModel)]="sugestao"></ion-input>
+          </div>
+          <hr>
+          <h1>Em qual área a sua sugestão se encaixa melhor ?</h1>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeA01($event)" [checked]="checkA01" ></ion-checkbox>
+
+            <p id="checkboxContent"> Cultura e Turismo</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA02($event)" [checked]="checkA02"></ion-checkbox>
+
+            <p id="checkboxContent"> Educação</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA03($event)" [checked]="checkA03"></ion-checkbox>
+
+            <p id="checkboxContent"> Serviços Publicos</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA04($event)" [checked]="checkA04"></ion-checkbox>
+
+            <p id="checkboxContent"> Assistencia Social</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA05($event)" [checked]="checkA05"></ion-checkbox>
+
+            <p id="checkboxContent"> Saúde</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA06($event)" [checked]="checkA06"></ion-checkbox>
+
+            <p id="checkboxContent"> Obras e infraestruturas</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA07($event)" [checked]="checkA07"></ion-checkbox>
+
+            <p id="checkboxContent"> Seguraça e Trânsito</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA08($event)" [checked]="checkA08"></ion-checkbox>
+
+            <p id="checkboxContent"> Administração e Finanças</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox  (ionChange)="onChangeA09($event)" [checked]="checkA09"></ion-checkbox>
+
+            <p id="checkboxContent"> Meio Ambiente</p>
+
+          </div>
+          <hr>
+          <h1>Qual o publico que a suas sugestão afetar ?</h1>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeB01($event)"  [checked]="checkB01"></ion-checkbox>
+
+            <p id="checkboxContent"> Idosos</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeB02($event)" [checked]="checkB02"></ion-checkbox>
+
+            <p id="checkboxContent"> Adultos</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeB03($event)" [checked]="checkB03"></ion-checkbox>
+
+            <p id="checkboxContent"> Jovens</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeB04($event)" [checked]="checkB04"></ion-checkbox>
+
+            <p id="checkboxContent"> Crianças</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeB05($event)" [checked]="checkB05"> </ion-checkbox>
+
+            <p id="checkboxContent"> Todos</p>
+
+          </div>
+
+
+          <hr>
+
+          <div id="cidades">
+            <h1>Qual municipio que deseja atingir ?</h1>
+            <button id="botaoMunicipio" (click)="procurarMunicipio()">Escolhar Cidade</button>
+          </div>
+          <p id="tipoCidade" >Cidade: <Span class="azulClaro">{{cidade}}</Span></p>
+          <hr>
+
+
+        </ion-card-content>
+      </ion-card>
+
+      <div id="dataRodape">
+      </div>
+    </div>
+    <div class="botaosEncontros">
+      <button id="botaoEncontro" (click)="voltarCalendario()"> Voltar</button>
+      <button id="botaoEncontro" (click)="ideiaOk()"> Enviar Ideia</button>
+    </div>
+  </div>
+
+  <div class="bodyCalendario" [ngStyle]="bodyCalendarioStyle" *ngIf="bodyCalendario">
+
+    <div class="cardInicial">
+
+      <img id="logo" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+
+    </div>
+    <br>
+    <h1 id="titleEvento"> Previsão de Datas do Evento</h1>
+
+    <div class="encontro">
+
+      <div>
+        <div class="calendario">
+          <div class="cabecalho">
+            <h2>JANEIRO</h2>
+          </div>
+          <div class="semana">
+            <div>D</div>
+            <div>S</div>
+            <div>T</div>
+            <div>Q</div>
+            <div>Q</div>
+            <div>S</div>
+            <div>S</div>
+          </div>
+          <div class="dias">
+            <div></div>
+            <div></div>
+            <div>1</div>
+            <div>2</div>
+            <div class="ativo">3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div class="ativo">13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div class="ativo">17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+            <div>31</div>
+          </div>
+        </div>
+        <br>
+        <button id="botaoSaiba" (click)="MeusEncontrosJaneiro()"> Sugestão</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <style>
+    ion-toolbar {
+      --background: #1565c0;
+      --color: white;
+      border-bottom: solid 2px white;
+    }
+
+    ion-button {
+
+      --color: white;
+    }
+
+    ion-card {
+
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      box-shadow: none;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    ion-checkbox {
+      --size: 20px;
+      --checkbox-background-checked: rgb(0, 60, 255);
+    }
+
+    ion-checkbox::part(container) {
+      border-radius: 6px;
+      border: 2px solid #ffffff;
+    }
+  </style>
+</ion-content>

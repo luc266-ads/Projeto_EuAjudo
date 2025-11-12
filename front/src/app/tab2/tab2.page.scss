@@ -1,0 +1,88 @@
+.cardInicial {
+margin-left: 75px;
+margin-right: 75px;
+
+}
+
+#logoTipo {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+
+}
+
+#cardLogo {
+    border-radius: 50%;
+    background-color: #1565c0;
+    box-shadow: none;
+}
+
+#login {
+    border-end-start-radius: 5%;
+    box-shadow: none;
+    background-color: #1565c0;
+
+}
+
+#title {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+
+
+}
+
+#emailCor,
+#senhaCor {
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: large;
+
+}
+
+.botaoLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+
+#cardTitle {
+    box-shadow: none;
+    border-radius: 20px;
+    background-color: #2196f3;
+}
+
+#links01,
+#links02 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+
+
+
+
+}
+
+#botaoSaiba {
+
+    color: white;
+    background-color: #0d47a1;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    border-radius: 5%;
+    height: 3pc;
+    width: 10pc;
+}
