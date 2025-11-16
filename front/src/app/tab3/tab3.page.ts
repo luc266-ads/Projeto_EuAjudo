@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CidadesPE } from '../serviceMP/cidades-pe';
 import { Api } from '../service/api';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-tab3',
@@ -32,10 +33,11 @@ export class Tab3Page {
       recursosDigitais: false,
 
     };
-
+  nome: any = [];
   guardaSugestao: any[] = [];
   sugestao: string = '';
-  cidade: string = 'olinda';
+  cidade: any = this.nome.toString.length;
+  
 
   ///// CATEGORIA DA SUGESTÃO //////
 
@@ -50,13 +52,14 @@ export class Tab3Page {
   ////// PUBLICO /////
   tipoPublico: string = ""
   idosos: boolean = false;
-  adultos: boolean = false;
-  jovens: boolean = false;
+  adulto: boolean = false;
+  jovem: boolean = false;
   adolescente: boolean = false;
-  criancas: boolean = false;
+  crianca: boolean = false;
 
   ///// TIPO DE APROXIMIDADE COM A VITIMA /////
   tipoParentesco: string = ""
+  outroInput01: string = ""
   filhos: boolean = false;
   pais: boolean = false;
   companheiro: boolean = false;
@@ -66,10 +69,8 @@ export class Tab3Page {
 
   //// OBJETIVO PRINCIPAL DA SUGESTÃO ////
 
-  objetivoSugestao = ""
-
-  
-
+  objetivoSugestao: string = ""
+  outroInput02: string = ""
   reduzirTL: boolean = false;
   MelhorarSM: boolean = false;
   autocontrole: boolean = false;
@@ -91,6 +92,14 @@ export class Tab3Page {
   checkA06: boolean = false;
   checkA07: boolean = false;
 
+  checkDisableA01: boolean = false;
+  checkDisableA02: boolean = false;
+  checkDisableA03: boolean = false;
+  checkDisableA04: boolean = false;
+  checkDisableA05: boolean = false;
+  checkDisableA06: boolean = false;
+  checkDisableA07: boolean = false;
+
 
   ////////// CHECK B0 ////////
 
@@ -100,6 +109,12 @@ export class Tab3Page {
   checkB04: boolean = false;
   checkB05: boolean = false;
 
+  checkDisableB01: boolean = false;
+  checkDisableB02: boolean = false;
+  checkDisableB03: boolean = false;
+  checkDisableB04: boolean = false;
+  checkDisableB05: boolean = false;
+
   /////// CHECK C0 /////////
 
   checkC01: boolean = false;
@@ -108,6 +123,13 @@ export class Tab3Page {
   checkC04: boolean = false;
   checkC05: boolean = false;
   checkC06: boolean = false;
+
+  checkDisableC01: boolean = false;
+  checkDisableC02: boolean = false;
+  checkDisableC03: boolean = false;
+  checkDisableC04: boolean = false;
+  checkDisableC05: boolean = false;
+  checkDisableC06: boolean = false;
 
   ////// CHECK D0 /////////
 
@@ -119,12 +141,20 @@ export class Tab3Page {
   checkD06: boolean = false;
   checkD07: boolean = false;
 
+  checkDisableD01: boolean = false;
+  checkDisableD02: boolean = false;
+  checkDisableD03: boolean = false;
+  checkDisableD04: boolean = false;
+  checkDisableD05: boolean = false;
+  checkDisableD06: boolean = false;
+  checkDisableD07: boolean = false;
+
 
   ///// CADS /////
 
   buscarCidade: boolean = false;
-  bodySugestao: boolean = false;
-  bodyCalendario: boolean = true;
+  bodySugestao: boolean = true;
+  bodyCalendario: boolean = false;
   sugestaoOk: boolean = false;
   menuEncontro: boolean = false;
 
@@ -134,7 +164,7 @@ export class Tab3Page {
 
 
 
-  nome: any = [];
+ 
 
   get bodyCalendarioStyle() {
     if (this.menuEncontro === false) {
@@ -260,16 +290,6 @@ export class Tab3Page {
 
 
   }
-  inpuntOutro01() {
-
-
-
-  }
-  inpuntOutro02() {
-
-
-
-  }
 
   ////// CHECKBOX A0 ///////
 
@@ -277,6 +297,7 @@ export class Tab3Page {
     if (event.detail.checked == true) {
       let valor = "Prenveção"
       this.prevencao = true
+
     }
   }
   onChangeA02(event: any) {
@@ -322,31 +343,96 @@ export class Tab3Page {
   onChangeB01(event: any) {
     if (event.detail.checked == true) {
       let valor = "Idosos"
+      this.tipoPublico = valor;
       this.idosos = true
+      this.checkDisableB02 = true
+      this.checkDisableB03 = true
+      this.checkDisableB04 = true
+      this.checkDisableB05 = true
+    } else {
+      this.tipoPublico = "";
+      this.checkDisableB02 = false
+      this.checkDisableB03 = false
+      this.checkDisableB04 = false
+      this.checkDisableB05 = false
+
+
     }
   }
   onChangeB02(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Adultos"
-      this.adultos = true
+      let valor = "Adulto"
+      this.tipoPublico = valor;
+      this.adulto = true
+      this.checkDisableB01 = true
+      this.checkDisableB03 = true
+      this.checkDisableB04 = true
+      this.checkDisableB05 = true
+    } else {
+      this.tipoPublico = "";
+      this.checkDisableB01 = false
+      this.checkDisableB03 = false
+      this.checkDisableB04 = false
+      this.checkDisableB05 = false
+
+
     }
   }
   onChangeB03(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Jovens"
-      this.jovens = true
+      let valor = "Jovem"
+      this.tipoPublico = valor;
+      this.jovem = true
+      this.checkDisableB01 = true
+      this.checkDisableB02 = true
+      this.checkDisableB04 = true
+      this.checkDisableB05 = true
+    } else {
+      this.tipoPublico = "";
+      this.checkDisableB01 = false
+      this.checkDisableB02 = false
+      this.checkDisableB04 = false
+      this.checkDisableB05 = false
+
+
     }
   }
   onChangeB04(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Crianças"
-      this.criancas = true
+      let valor = "Adolescente"
+      this.tipoPublico = valor;
+      this.adolescente = true
+      this.checkDisableB01 = true
+      this.checkDisableB02 = true
+      this.checkDisableB03 = true
+      this.checkDisableB05 = true
+    } else {
+      this.tipoPublico = "";
+      this.checkDisableB01 = false
+      this.checkDisableB02 = false
+      this.checkDisableB03 = false
+      this.checkDisableB05 = false
+
+
     }
   }
   onChangeB05(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Adolescente"
-      this.adolescente = true
+      let valor = "Criança"
+      this.tipoPublico = valor;
+      this.crianca = true
+      this.checkDisableB01 = true
+      this.checkDisableB02 = true
+      this.checkDisableB03 = true
+      this.checkDisableB04 = true
+    } else {
+      this.tipoPublico = "";
+      this.checkDisableB01 = false
+      this.checkDisableB02 = false
+      this.checkDisableB03 = false
+      this.checkDisableB04 = false
+
+
     }
   }
 
@@ -355,31 +441,110 @@ export class Tab3Page {
   onChangeC01(event: any) {
     if (event.detail.checked == true) {
       let valor = "filho(a)"
+      this.tipoParentesco = valor;
       this.filhos = true
+      this.checkDisableC02 = true
+      this.checkDisableC03 = true
+      this.checkDisableC04 = true
+      this.checkDisableC05 = true
+      this.checkDisableC06 = true
+
+    } else {
+      this.tipoParentesco = "";
+      this.checkDisableC02 = false
+      this.checkDisableC03 = false
+      this.checkDisableC04 = false
+      this.checkDisableC05 = false
+      this.checkDisableC06 = false
+
+
     }
   }
   onChangeC02(event: any) {
     if (event.detail.checked == true) {
       let valor = "Pais"
+      this.tipoParentesco = valor;
       this.pais = true
+      this.checkDisableC01 = true
+      this.checkDisableC03 = true
+      this.checkDisableC04 = true
+      this.checkDisableC05 = true
+      this.checkDisableC06 = true
+
+    } else {
+      this.tipoParentesco = "";
+      this.checkDisableC01 = false
+      this.checkDisableC03 = false
+      this.checkDisableC04 = false
+      this.checkDisableC05 = false
+      this.checkDisableC06 = false
+
+
     }
   }
   onChangeC03(event: any) {
     if (event.detail.checked == true) {
       let valor = "Companheiro(a)"
+      this.tipoParentesco = valor;
       this.companheiro = true
+      this.checkDisableC01 = true
+      this.checkDisableC02 = true
+      this.checkDisableC04 = true
+      this.checkDisableC05 = true
+      this.checkDisableC06 = true
+
+    } else {
+      this.tipoParentesco = "";
+      this.checkDisableC01 = false
+      this.checkDisableC02 = false
+      this.checkDisableC04 = false
+      this.checkDisableC05 = false
+      this.checkDisableC06 = false
+
+
     }
   }
   onChangeC04(event: any) {
     if (event.detail.checked == true) {
       let valor = "Avo(a)"
+      this.tipoParentesco = valor;
       this.avos = true
+      this.checkDisableC01 = true
+      this.checkDisableC02 = true
+      this.checkDisableC03 = true
+      this.checkDisableC05 = true
+      this.checkDisableC06 = true
+
+    } else {
+      this.tipoParentesco = "";
+      this.checkDisableC01 = false
+      this.checkDisableC02 = false
+      this.checkDisableC03 = false
+      this.checkDisableC05 = false
+      this.checkDisableC06 = false
+
+
     }
   }
   onChangeC05(event: any) {
     if (event.detail.checked == true) {
       let valor = "Amigo(a)"
+      this.tipoParentesco = valor;
       this.amigo = true
+      this.checkDisableC01 = true
+      this.checkDisableC02 = true
+      this.checkDisableC03 = true
+      this.checkDisableC04 = true
+      this.checkDisableC06 = true
+    } else {
+      this.tipoParentesco = "";
+      this.checkDisableC01 = false
+      this.checkDisableC02 = false
+      this.checkDisableC03 = false
+      this.checkDisableC04 = false
+      this.checkDisableC06 = false
+
+
     }
   }
   onChangeC06(event: any) {
@@ -387,8 +552,18 @@ export class Tab3Page {
       let valor = "Outros"
       this.outro = true
       this.outroTipoV = true
-    } else{
+      this.checkDisableC01 = true
+      this.checkDisableC02 = true
+      this.checkDisableC03 = true
+      this.checkDisableC04 = true
+      this.checkDisableC05 = true
+    } else {
 
+      this.checkDisableC01 = false
+      this.checkDisableC02 = false
+      this.checkDisableC03 = false
+      this.checkDisableC04 = false
+      this.checkDisableC05 = false
       this.outroTipoV = false
     }
   }
@@ -400,37 +575,146 @@ export class Tab3Page {
   onChangeD01(event: any) {
     if (event.detail.checked == true) {
       let valor = "Reduzir o tempo de tela"
+      this.objetivoSugestao = valor;
       this.reduzirTL = true
+      this.checkDisableD02 = true
+      this.checkDisableD03 = true
+      this.checkDisableD04 = true
+      this.checkDisableD05 = true
+      this.checkDisableD06 = true
+      this.checkDisableD07 = true
+
+    } else {
+      this.objetivoSugestao = "";
+      this.checkDisableD02 = false
+      this.checkDisableD03 = false
+      this.checkDisableD04 = false
+      this.checkDisableD05 = false
+      this.checkDisableD06 = false
+      this.checkDisableD07 = false
+
+
     }
   }
   onChangeD02(event: any) {
     if (event.detail.checked == true) {
       let valor = "Melhorar a saúde mental"
+      this.objetivoSugestao = valor;
       this.MelhorarSM = true
+      this.checkDisableD01 = true
+      this.checkDisableD03 = true
+      this.checkDisableD04 = true
+      this.checkDisableD05 = true
+      this.checkDisableD06 = true
+      this.checkDisableD07 = true
+
+    } else {
+      this.objetivoSugestao = "";
+      this.checkDisableD01 = false
+      this.checkDisableD03 = false
+      this.checkDisableD04 = false
+      this.checkDisableD05 = false
+      this.checkDisableD06 = false
+      this.checkDisableD07 = false
+
+
     }
   }
   onChangeD03(event: any) {
     if (event.detail.checked == true) {
       let valor = " Melhorar relações sociais"
+      this.objetivoSugestao = valor;
       this.relacaoSocial = true
+      this.checkDisableD01 = true
+      this.checkDisableD02 = true
+      this.checkDisableD04 = true
+      this.checkDisableD05 = true
+      this.checkDisableD06 = true
+      this.checkDisableD07 = true
+
+    } else {
+      this.objetivoSugestao = "";
+      this.checkDisableD01 = false
+      this.checkDisableD02 = false
+      this.checkDisableD04 = false
+      this.checkDisableD05 = false
+      this.checkDisableD06 = false
+      this.checkDisableD07 = false
+
+
     }
   }
   onChangeD04(event: any) {
     if (event.detail.checked == true) {
       let valor = "Aumentar o autocontrole"
+      this.objetivoSugestao = valor;
       this.autocontrole = true
+      this.checkDisableD01 = true
+      this.checkDisableD02 = true
+      this.checkDisableD03 = true
+      this.checkDisableD05 = true
+      this.checkDisableD06 = true
+      this.checkDisableD07 = true
+
+    } else {
+      this.objetivoSugestao = "";
+      this.checkDisableD01 = false
+      this.checkDisableD02 = false
+      this.checkDisableD03 = false
+      this.checkDisableD05 = false
+      this.checkDisableD06 = false
+      this.checkDisableD07 = false
+
+
     }
   }
   onChangeD05(event: any) {
     if (event.detail.checked == true) {
       let valor = "Incentivar hábitos saudáveis"
+      this.objetivoSugestao = valor;
       this.habitosSD = true
+      this.checkDisableD01 = true
+      this.checkDisableD02 = true
+      this.checkDisableD03 = true
+      this.checkDisableD04 = true
+      this.checkDisableD06 = true
+      this.checkDisableD07 = true
+
+    } else {
+      this.objetivoSugestao = "";
+      this.checkDisableD01 = false
+      this.checkDisableD02 = false
+      this.checkDisableD03 = false
+      this.checkDisableD04 = false
+      this.checkDisableD06 = false
+      this.checkDisableD07 = false
+
+
     }
   }
   onChangeD06(event: any) {
     if (event.detail.checked == true) {
       let valor = "Auxiliar na organização da rotina"
+      this.objetivoSugestao = valor;
       this.organizarRT = true
+      this.checkDisableD01 = true
+      this.checkDisableD02 = true
+      this.checkDisableD03 = true
+      this.checkDisableD04 = true
+      this.checkDisableD05 = true
+      this.checkDisableD07 = true
+
+    } else {
+      this.objetivoSugestao = "";
+      this.checkDisableD01 = false
+      this.checkDisableD02 = false
+      this.checkDisableD03 = false
+      this.checkDisableD04 = false
+      this.checkDisableD05 = false
+      this.checkDisableD07 = false
+
+
+
     }
   }
   onChangeD07(event: any) {
@@ -438,8 +722,20 @@ export class Tab3Page {
       let valor = "Outro"
       this.outroOB = true
       this.outroObjetivo = true
+      this.checkDisableD01 = true
+      this.checkDisableD02 = true
+      this.checkDisableD03 = true
+      this.checkDisableD04 = true
+      this.checkDisableD05 = true
+      this.checkDisableD06 = true
     } else {
       this.outroObjetivo = false
+      this.checkDisableD01 = false
+      this.checkDisableD02 = false
+      this.checkDisableD03 = false
+      this.checkDisableD04 = false
+      this.checkDisableD05 = false
+      this.checkDisableD06 = false
 
 
     }
