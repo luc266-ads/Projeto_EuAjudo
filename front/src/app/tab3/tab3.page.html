@@ -661,106 +661,195 @@
       <ion-card color="secondary">
         <ion-card-content>
           <div id="InputCor">
-            <ion-input label="Sugestao:" fill="outline" placeholder="Digite aqui"
-              [(ngModel)]="sugestao"></ion-input>
+            <ion-input label="Sugestao:" fill="outline" placeholder="Digite aqui" [(ngModel)]="sugestao"></ion-input>
           </div>
           <hr>
-          <h1>Em qual área a sua sugestão se encaixa melhor ?</h1>
+          <h1>Em qual categoria essa sugestão se encaixa melhor?</h1>
           <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA01($event)" [checked]="checkA01" ></ion-checkbox>
+            <ion-checkbox (ionChange)="onChangeA01($event)" [checked]="checkA01"></ion-checkbox>
 
-            <p id="checkboxContent"> Cultura e Turismo</p>
+            <p id="checkboxContent">Prevenção</p>
 
           </div>
           <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA02($event)" [checked]="checkA02"></ion-checkbox>
+            <ion-checkbox (ionChange)="onChangeA02($event)" [checked]="checkA02"></ion-checkbox>
 
-            <p id="checkboxContent"> Educação</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA03($event)" [checked]="checkA03"></ion-checkbox>
-
-            <p id="checkboxContent"> Serviços Publicos</p>
+            <p id="checkboxContent">Tratamento</p>
 
           </div>
           <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA04($event)" [checked]="checkA04"></ion-checkbox>
+            <ion-checkbox (ionChange)="onChangeA03($event)" [checked]="checkA03"></ion-checkbox>
 
-            <p id="checkboxContent"> Assistencia Social</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA05($event)" [checked]="checkA05"></ion-checkbox>
-
-            <p id="checkboxContent"> Saúde</p>
+            <p id="checkboxContent">Conscientização</p>
 
           </div>
           <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA06($event)" [checked]="checkA06"></ion-checkbox>
+            <ion-checkbox (ionChange)="onChangeA04($event)" [checked]="checkA04"></ion-checkbox>
 
-            <p id="checkboxContent"> Obras e infraestruturas</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA07($event)" [checked]="checkA07"></ion-checkbox>
-
-            <p id="checkboxContent"> Seguraça e Trânsito</p>
+            <p id="checkboxContent">Suporte emocional</p>
 
           </div>
           <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA08($event)" [checked]="checkA08"></ion-checkbox>
+            <ion-checkbox (ionChange)="onChangeA05($event)" [checked]="checkA05"></ion-checkbox>
 
-            <p id="checkboxContent"> Administração e Finanças</p>
+            <p id="checkboxContent">Educação</p>
 
           </div>
           <div class="checkbox">
-            <ion-checkbox  (ionChange)="onChangeA09($event)" [checked]="checkA09"></ion-checkbox>
+            <ion-checkbox (ionChange)="onChangeA06($event)" [checked]="checkA06"></ion-checkbox>
 
-            <p id="checkboxContent"> Meio Ambiente</p>
+            <p id="checkboxContent">Recursos digitais</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeA07($event)" [checked]="checkA07"></ion-checkbox>
+
+            <p id="checkboxContent">Comunidade/Apoio coletivo</p>
 
           </div>
           <hr>
-          <h1>Qual o publico que a suas sugestão afetar ?</h1>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeB01($event)"  [checked]="checkB01"></ion-checkbox>
 
-            <p id="checkboxContent"> Idosos</p>
+          <h1> Essa sugestão é voltada para qual público</h1>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeB01($event)" [checked]="checkB01"></ion-checkbox>
+
+            <p id="checkboxContent"> Idoso</p>
 
           </div>
           <div class="checkbox">
             <ion-checkbox (ionChange)="onChangeB02($event)" [checked]="checkB02"></ion-checkbox>
 
-            <p id="checkboxContent"> Adultos</p>
+            <p id="checkboxContent"> Adulto</p>
 
           </div>
           <div class="checkbox">
             <ion-checkbox (ionChange)="onChangeB03($event)" [checked]="checkB03"></ion-checkbox>
 
-            <p id="checkboxContent"> Jovens</p>
+            <p id="checkboxContent"> Jovem</p>
 
           </div>
           <div class="checkbox">
             <ion-checkbox (ionChange)="onChangeB04($event)" [checked]="checkB04"></ion-checkbox>
 
-            <p id="checkboxContent"> Crianças</p>
+            <p id="checkboxContent">Adolescente</p>
 
           </div>
           <div class="checkbox">
             <ion-checkbox (ionChange)="onChangeB05($event)" [checked]="checkB05"> </ion-checkbox>
 
-            <p id="checkboxContent"> Todos</p>
+            <p id="checkboxContent">Criança</p>
 
           </div>
 
 
+          <hr>
+
+          <h1> Que tipo de proximidade se tem com esta vitima? </h1>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeC01($event)" [checked]="checkC01"></ion-checkbox>
+
+            <p id="checkboxContent">filho/filha</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeC02($event)" [checked]="checkC02"></ion-checkbox>
+
+            <p id="checkboxContent">Pais</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeC03($event)" [checked]="checkC03"></ion-checkbox>
+
+            <p id="checkboxContent">Marido/Esposa</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeC04($event)" [checked]="checkC04"></ion-checkbox>
+
+            <p id="checkboxContent">Avós</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeC05($event)" [checked]="checkC05"> </ion-checkbox>
+
+            <p id="checkboxContent">Amigo(a)</p>
+
+          </div>
+
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeC06($event)" [checked]="checkC06"> </ion-checkbox>
+
+            <p id="checkboxContent">Outro</p>
+          </div>
+          <div *ngIf="outroTipoV" class="outro01">
+            <br>
+            <div id="InputCor">
+              <ion-input label="Sugestao:" fill="outline" placeholder="Digite aqui" [(ngModel)]="sugestao"></ion-input>
+            </div>
+          </div>
+
+          <hr>
+
+          <h1> Qual é o objetivo principal dessa sugestão?</h1>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD01($event)" [checked]="checkD01"></ion-checkbox>
+
+            <p id="checkboxContent">Reduzir o tempo de tela</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD02($event)" [checked]="checkD02"></ion-checkbox>
+
+            <p id="checkboxContent">Melhorar a saúde mental</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD03($event)" [checked]="checkD03"></ion-checkbox>
+
+            <p id="checkboxContent">Aumentar o autocontrole</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD04($event)" [checked]="checkD04"></ion-checkbox>
+
+            <p id="checkboxContent">Incentivar hábitos saudáveis</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD05($event)" [checked]="checkD05"> </ion-checkbox>
+
+            <p id="checkboxContent">Melhorar relações sociais</p>
+
+          </div>
+
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD06($event)" [checked]="checkD06"> </ion-checkbox>
+
+            <p id="checkboxContent">Auxiliar na organização da rotina</p>
+
+          </div>
+          <div class="checkbox">
+            <ion-checkbox (ionChange)="onChangeD07($event)" [checked]="checkD07"> </ion-checkbox>
+
+            <p id="checkboxContent">Outro</p>
+
+          </div>
+
+          <div *ngIf="outroObjetivo" class="outro02">
+
+            <br>
+            <div id="InputCor">
+              <ion-input label="Sugestao:" fill="outline" placeholder="Digite aqui" [(ngModel)]="sugestao"></ion-input>
+            </div>
+
+          </div>
           <hr>
 
           <div id="cidades">
             <h1>Qual municipio que deseja atingir ?</h1>
             <button id="botaoMunicipio" (click)="procurarMunicipio()">Escolhar Cidade</button>
           </div>
-          <p id="tipoCidade" >Cidade: <Span class="azulClaro">{{cidade}}</Span></p>
+          <p id="tipoCidade">Cidade: <Span class="azulClaro">{{cidade}}</Span></p>
           <hr>
 
 

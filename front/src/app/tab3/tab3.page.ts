@@ -12,62 +12,75 @@ export class Tab3Page {
 
 
   sugestoes: {
-  sugestao: string;
-  cidade: string;
-  culturaTurismo: boolean;
-  educacao: boolean;
-  servicosPublicos: boolean;
-  assistenciaSocial: boolean;
-  saude: boolean;
-  obrasinfraestruturas: boolean;
-  segurancaTransito: boolean;
-  administracaofinancas: boolean;
-  meioAmbiente: boolean;
-  idosos: boolean;
-  adultos: boolean;
-  jovens: boolean;
-  criancas: boolean;
-  Todos: boolean;
-} = {
-  sugestao: '',
-  cidade: '',
-  culturaTurismo: false,
-  educacao: false,
-  servicosPublicos: false,
-  assistenciaSocial: false,
-  saude: false,
-  obrasinfraestruturas: false,
-  segurancaTransito: false,
-  administracaofinancas: false,
-  meioAmbiente: false,
-  idosos: false,
-  adultos: false,
-  jovens: false,
-  criancas: false,
-  Todos: false,
-};
+    sugestao: string;
+    cidade: string;
+    prevencao: boolean;
+    tratamento: boolean;
+    suporteEmocional: boolean;
+    educacao: boolean;
+    apoioColetivo: boolean;
+    recursosDigitais: boolean;
 
-guardaSugestao: any[] = [];
-sugestao: string = '';
-cidade: string = 'olinda';
-culturaTurismo: boolean = false;
-educacao: boolean = false;
-servicosPublicos: boolean = false;
-assistenciaSocial: boolean = false;
-saude: boolean = false;
-obrasinfraestruturas: boolean = false;
-segurancaTransito: boolean = false;
-administracaofinancas: boolean = false;
-meioAmbiente: boolean = false;
-idosos: boolean = false;
-adultos: boolean = false;
-jovens: boolean = false;
-criancas: boolean = false;
-Todos: boolean = false;
+  } = {
+      sugestao: '',
+      cidade: '',
+      prevencao: false,
+      tratamento: false,
+      suporteEmocional: false,
+      educacao: false,
+      apoioColetivo: false,
+      recursosDigitais: false,
+
+    };
+
+  guardaSugestao: any[] = [];
+  sugestao: string = '';
+  cidade: string = 'olinda';
+
+  ///// CATEGORIA DA SUGESTÃO //////
+
+  prevencao: boolean = false;
+  tratamento: boolean = false;
+  conscientizaçao: boolean = false;
+  suporteEmocional: boolean = false;
+  educacao: boolean = false;
+  apoioColetivo: boolean = false;
+  recursosDigitais: boolean = false;
+
+  ////// PUBLICO /////
+  tipoPublico: string = ""
+  idosos: boolean = false;
+  adultos: boolean = false;
+  jovens: boolean = false;
+  adolescente: boolean = false;
+  criancas: boolean = false;
+
+  ///// TIPO DE APROXIMIDADE COM A VITIMA /////
+  tipoParentesco: string = ""
+  filhos: boolean = false;
+  pais: boolean = false;
+  companheiro: boolean = false;
+  amigo: boolean = false;
+  avos: boolean = false;
+  outro: boolean = false;
+
+  //// OBJETIVO PRINCIPAL DA SUGESTÃO ////
+
+  objetivoSugestao = ""
+
+  
+
+  reduzirTL: boolean = false;
+  MelhorarSM: boolean = false;
+  autocontrole: boolean = false;
+  habitosSD: boolean = false;
+  relacaoSocial: boolean = false;
+  organizarRT: boolean = false;
+  outroOB: boolean = false;
 
   constructor(private CidadesPE: CidadesPE,
     private Api: Api
-  ) {}
+  ) { }
 
   ////////// CHECK A0 ////////
   checkA01: boolean = false;
@@ -77,8 +90,7 @@ Todos: boolean = false;
   checkA05: boolean = false;
   checkA06: boolean = false;
   checkA07: boolean = false;
-  checkA08: boolean = false;
-  checkA09: boolean = false;
+
 
   ////////// CHECK B0 ////////
 
@@ -88,12 +100,39 @@ Todos: boolean = false;
   checkB04: boolean = false;
   checkB05: boolean = false;
 
+  /////// CHECK C0 /////////
+
+  checkC01: boolean = false;
+  checkC02: boolean = false;
+  checkC03: boolean = false;
+  checkC04: boolean = false;
+  checkC05: boolean = false;
+  checkC06: boolean = false;
+
+  ////// CHECK D0 /////////
+
+  checkD01: boolean = false;
+  checkD02: boolean = false;
+  checkD03: boolean = false;
+  checkD04: boolean = false;
+  checkD05: boolean = false;
+  checkD06: boolean = false;
+  checkD07: boolean = false;
+
+
+  ///// CADS /////
 
   buscarCidade: boolean = false;
   bodySugestao: boolean = false;
   bodyCalendario: boolean = true;
   sugestaoOk: boolean = false;
   menuEncontro: boolean = false;
+
+  ///// INPUTS OUTROS ////
+  outroObjetivo: boolean = false;
+  outroTipoV: boolean = false;
+
+
 
   nome: any = [];
 
@@ -124,7 +163,7 @@ Todos: boolean = false;
   }
 
 
- ngOnInit() {
+  ngOnInit() {
     this.listarSugestões();
   }
 
@@ -132,23 +171,16 @@ Todos: boolean = false;
   ideiaOk() {
     // Monta o objeto ANTES da requisição
     this.sugestoes = {
-    sugestao: this.sugestao,
-    cidade: this.cidade,
-    culturaTurismo: this.culturaTurismo,
-    educacao: this.educacao,
-    servicosPublicos: this.servicosPublicos,
-    assistenciaSocial: this.assistenciaSocial,
-    saude: this.saude,
-    obrasinfraestruturas: this.obrasinfraestruturas,
-    segurancaTransito: this.segurancaTransito,
-    administracaofinancas: this.administracaofinancas,
-    meioAmbiente: this.meioAmbiente,
-    idosos: this.idosos,
-    adultos: this.adultos,
-    jovens: this.jovens,
-    criancas: this.criancas,
-    Todos: this.Todos
-  };
+      sugestao: this.sugestao,
+      cidade: this.cidade,
+      prevencao: this.prevencao,
+      tratamento: this.tratamento,
+      suporteEmocional: this.suporteEmocional,
+      educacao: this.educacao,
+      apoioColetivo: this.apoioColetivo,
+      recursosDigitais: this.recursosDigitais,
+
+    };
 
     this.Api.cadastrarSugestao(this.sugestoes).subscribe({
       next: (res: any) => {
@@ -156,24 +188,17 @@ Todos: boolean = false;
         this.listarSugestões();
 
         // Limpa o formulário
-        
-      this.sugestao = '';
-      this.cidade = '';
-      this.culturaTurismo = false;
-      this.educacao = false;
-      this.servicosPublicos = false;
-      this.assistenciaSocial = false;
-      this.saude = false;
-      this.obrasinfraestruturas = false;
-      this.segurancaTransito = false;
-      this.administracaofinancas = false;
-      this.meioAmbiente = false;
-      this.idosos = false;
-      this.adultos = false;
-      this.jovens = false;
-      this.criancas = false;
-      this.Todos = false;
-       
+
+        this.sugestao = '';
+        this.cidade = '';
+        this.prevencao = false;
+        this.tratamento = false;
+        this.suporteEmocional = false;
+        this.educacao = false;
+        this.apoioColetivo = false;
+        this.recursosDigitais = false;
+
+
       },
       error: (err) => {
         console.error(err);
@@ -202,12 +227,9 @@ Todos: boolean = false;
 
 
   EncontroLeft() {
-
     this.menuEncontro = !this.menuEncontro;
 
-
   }
-
   procurarMunicipio() {
 
     this.buscarCidade = true
@@ -219,8 +241,6 @@ Todos: boolean = false;
     this.bodySugestao = true
 
   }
-
-
   MeusEncontrosJaneiro() {
     this.bodySugestao = true;
     this.bodyCalendario = false;
@@ -233,8 +253,6 @@ Todos: boolean = false;
     this.bodyCalendario = true;
 
   }
-
-
   voltarSusgetao() {
     this.sugestaoOk = false;
     this.bodyCalendario = true;
@@ -242,61 +260,59 @@ Todos: boolean = false;
 
 
   }
+  inpuntOutro01() {
 
-////// CHECKBOX A0 ///////
 
-   onChangeA01(event: any) {
+
+  }
+  inpuntOutro02() {
+
+
+
+  }
+
+  ////// CHECKBOX A0 ///////
+
+  onChangeA01(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Cultura e Turismo"
-      this.culturaTurismo = true
+      let valor = "Prenveção"
+      this.prevencao = true
     }
   }
   onChangeA02(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Tratamento"
+      this.tratamento = true
+    }
+  }
+  onChangeA03(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Conscientização"
+      this.conscientizaçao = true
+    }
+  }
+  onChangeA04(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Suporte emocional"
+      this.suporteEmocional = true
+    }
+  }
+  onChangeA05(event: any) {
     if (event.detail.checked == true) {
       let valor = "Educação"
       this.educacao = true
     }
   }
-  onChangeA03(event: any) {
-    if (event.detail.checked == true) {
-      let valor = " Serviços Publicos"
-      this.servicosPublicos = true
-    }
-  }
-  onChangeA04(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Assistencia Social"
-      this.assistenciaSocial = true
-    }
-  }
-  onChangeA05(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Saúde"
-      this.saude = true
-    }
-  }
   onChangeA06(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Obras e infraestruturas"
-      this.obrasinfraestruturas = true
+      let valor = "Recursos digitais"
+      this.recursosDigitais = true
     }
   }
   onChangeA07(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Seguraça e Trânsito"
-      this.segurancaTransito = true
-    }
-  }
-  onChangeA08(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Administração e Finanças"
-      this.administracaofinancas = true
-    }
-  }
-  onChangeA09(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Meio Ambiente"
-      this.meioAmbiente = true
+      let valor = "Comunidade/Apoio coletivo"
+      this.apoioColetivo = true
     }
   }
 
@@ -312,7 +328,7 @@ Todos: boolean = false;
   onChangeB02(event: any) {
     if (event.detail.checked == true) {
       let valor = "Adultos"
-    this.adultos = true
+      this.adultos = true
     }
   }
   onChangeB03(event: any) {
@@ -329,10 +345,107 @@ Todos: boolean = false;
   }
   onChangeB05(event: any) {
     if (event.detail.checked == true) {
-      let valor = "Todos"
-      this.Todos = true
+      let valor = "Adolescente"
+      this.adolescente = true
     }
   }
+
+  ////// CHECKBOX C0 ///////
+
+  onChangeC01(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "filho(a)"
+      this.filhos = true
+    }
+  }
+  onChangeC02(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Pais"
+      this.pais = true
+    }
+  }
+  onChangeC03(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Companheiro(a)"
+      this.companheiro = true
+    }
+  }
+  onChangeC04(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Avo(a)"
+      this.avos = true
+    }
+  }
+  onChangeC05(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Amigo(a)"
+      this.amigo = true
+    }
+  }
+  onChangeC06(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Outros"
+      this.outro = true
+      this.outroTipoV = true
+    } else{
+
+      this.outroTipoV = false
+    }
+  }
+
+
+  ////// CHECKBOX D0 ///////
+
+
+  onChangeD01(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Reduzir o tempo de tela"
+      this.reduzirTL = true
+    }
+  }
+  onChangeD02(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Melhorar a saúde mental"
+      this.MelhorarSM = true
+    }
+  }
+  onChangeD03(event: any) {
+    if (event.detail.checked == true) {
+      let valor = " Melhorar relações sociais"
+      this.relacaoSocial = true
+    }
+  }
+  onChangeD04(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Aumentar o autocontrole"
+      this.autocontrole = true
+    }
+  }
+  onChangeD05(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Incentivar hábitos saudáveis"
+      this.habitosSD = true
+    }
+  }
+  onChangeD06(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Auxiliar na organização da rotina"
+      this.organizarRT = true
+    }
+  }
+  onChangeD07(event: any) {
+    if (event.detail.checked == true) {
+      let valor = "Outro"
+      this.outroOB = true
+      this.outroObjetivo = true
+    } else {
+      this.outroObjetivo = false
+
+
+    }
+  }
+
+
 
   /////////////// CIDADES A0 //////////////////
 
