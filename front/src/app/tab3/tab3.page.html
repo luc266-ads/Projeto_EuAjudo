@@ -29,7 +29,14 @@
   <div *ngIf="sugestaoOk" id="sugestaoOk">
     <div id="sugestaoContet">
       <h3>Ideia Enviada com <span class="azul">SUCESSO!!</span></h3>
-      <button id="botaoSugestão" (click)="voltarSusgetao()"> Voltar</button>
+      <button id="botaoSugestão" (click)="voltarSugestaoOk()"> Voltar</button>
+    </div>
+
+  </div>
+    <div *ngIf="sugestaoNaoOk" id="sugestaoOk">
+    <div id="sugestaoContet">
+      <h3>Ideia Não Enviada ,<span class="azul">Tente Novamente!!</span></h3>
+      <button id="botaoSugestão" (click)="voltarSugetaoNaoOk()">Voltar</button>
     </div>
 
   </div>
@@ -843,14 +850,15 @@
             </div>
 
           </div>
-          <hr>
+
+          <!-- <hr>
 
           <div id="cidades">
             <h1>Qual municipio que deseja atingir ?</h1>
             <button id="botaoMunicipio" (click)="procurarMunicipio()">Escolhar Cidade</button>
           </div>
-          <p id="tipoCidade">Cidade: <Span class="azulClaro">{{nome}}</Span></p>
-          <hr>
+          <p id="tipoCidade">Cidade: <Span class="azulClaro">{{cidade}}</Span></p>
+          <hr> -->
 
 
         </ion-card-content>

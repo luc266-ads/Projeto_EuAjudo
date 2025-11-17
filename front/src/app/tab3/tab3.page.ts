@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CidadesPE } from '../serviceMP/cidades-pe';
 import { Api } from '../service/api';
 import { __values } from 'tslib';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-tab3',
@@ -11,10 +12,25 @@ import { __values } from 'tslib';
 })
 export class Tab3Page {
 
+  constructor(private CidadesPE: CidadesPE,
+    private Api: Api
+  ) { }
+  //// VAR TIMER INPUT_OUTROS01 ////
+  tempoInicial: number = 1;
+  tempoRestante: number = this.tempoInicial;
+  intervalo: any;
 
+  //// VAR TIMER INPUT_OUTROS02 ////
+  tempoInicial02: number = 1;
+  tempoRestante02: number = this.tempoInicial02;
+  intervalo02: any;
+
+ ////// ESTRUTURA API //////
   sugestoes: {
     sugestao: string;
-    cidade: string;
+    tipoPublico: string;
+    tipoParentesco: string;
+    objetivoSugestao: string;
     prevencao: boolean;
     tratamento: boolean;
     suporteEmocional: boolean;
@@ -24,7 +40,9 @@ export class Tab3Page {
 
   } = {
       sugestao: '',
-      cidade: '',
+      tipoPublico: '',
+      objetivoSugestao: '',
+      tipoParentesco: '',
       prevencao: false,
       tratamento: false,
       suporteEmocional: false,
@@ -36,8 +54,7 @@ export class Tab3Page {
   nome: any = [];
   guardaSugestao: any[] = [];
   sugestao: string = '';
-  cidade: any = this.nome.toString.length;
-  
+
 
   ///// CATEGORIA DA SUGESTÃO //////
 
@@ -59,6 +76,7 @@ export class Tab3Page {
 
   ///// TIPO DE APROXIMIDADE COM A VITIMA /////
   tipoParentesco: string = ""
+  teste: string = ""
   outroInput01: string = ""
   filhos: boolean = false;
   pais: boolean = false;
@@ -79,9 +97,7 @@ export class Tab3Page {
   organizarRT: boolean = false;
   outroOB: boolean = false;
 
-  constructor(private CidadesPE: CidadesPE,
-    private Api: Api
-  ) { }
+
 
   ////////// CHECK A0 ////////
   checkA01: boolean = false;
@@ -153,18 +169,16 @@ export class Tab3Page {
   ///// CADS /////
 
   buscarCidade: boolean = false;
-  bodySugestao: boolean = true;
-  bodyCalendario: boolean = false;
+  bodySugestao: boolean = false;
+  bodyCalendario: boolean = true;
   sugestaoOk: boolean = false;
+  sugestaoNaoOk: boolean = false;
   menuEncontro: boolean = false;
 
   ///// INPUTS OUTROS ////
   outroObjetivo: boolean = false;
   outroTipoV: boolean = false;
 
-
-
- 
 
   get bodyCalendarioStyle() {
     if (this.menuEncontro === false) {
@@ -195,6 +209,7 @@ export class Tab3Page {
 
   ngOnInit() {
     this.listarSugestões();
+
   }
 
 
@@ -202,7 +217,9 @@ export class Tab3Page {
     // Monta o objeto ANTES da requisição
     this.sugestoes = {
       sugestao: this.sugestao,
-      cidade: this.cidade,
+      tipoPublico: this.tipoPublico,
+      tipoParentesco: this.tipoParentesco,
+      objetivoSugestao: this.objetivoSugestao,
       prevencao: this.prevencao,
       tratamento: this.tratamento,
       suporteEmocional: this.suporteEmocional,
@@ -213,14 +230,15 @@ export class Tab3Page {
     };
 
     this.Api.cadastrarSugestao(this.sugestoes).subscribe({
-      next: (res: any) => {
-        alert(res.message || 'Sugestao cadastrada com sucesso!');
+      next: () => {
         this.listarSugestões();
-
+        this.sugestaoOk = true
         // Limpa o formulário
 
         this.sugestao = '';
-        this.cidade = '';
+        this.tipoPublico = '';
+        this.tipoParentesco = '';
+        this.objetivoSugestao = '';
         this.prevencao = false;
         this.tratamento = false;
         this.suporteEmocional = false;
@@ -232,12 +250,30 @@ export class Tab3Page {
       },
       error: (err) => {
         console.error(err);
-        alert('Erro ao cadastrar');
+        this.sugestaoNaoOk = true;
       },
     });
 
-    this.sugestaoOk = true
+    
     this.bodySugestao = false
+    this.checkDisableB01 = false
+    this.checkDisableB02 = false
+    this.checkDisableB03 = false
+    this.checkDisableB04 = false
+    this.checkDisableB05 = false
+    this.checkDisableC01 = false
+    this.checkDisableC02 = false
+    this.checkDisableC03 = false
+    this.checkDisableC04 = false
+    this.checkDisableC05 = false
+    this.checkDisableC06 = false
+    this.checkDisableD01 = false
+    this.checkDisableD02 = false
+    this.checkDisableD03 = false
+    this.checkDisableD04 = false
+    this.checkDisableD05 = false
+    this.checkDisableD06 = false
+    this.checkDisableD07 = false
   }
 
   listarSugestões() {
@@ -282,15 +318,29 @@ export class Tab3Page {
     this.bodySugestao = false;
     this.bodyCalendario = true;
 
+
   }
-  voltarSusgetao() {
+  voltarSugestaoOk() {
     this.sugestaoOk = false;
     this.bodyCalendario = true;
-
+    this.outroInput01 = ''
+    this.outroInput02 = ''
+    this.sugestao = ''
+    this.outroObjetivo = false
+    this.outroTipoV = false
 
 
   }
+  voltarSugetaoNaoOk(){
+    this.sugestaoNaoOk = false;
+    this.bodySugestao = true;
+    this.outroInput01 = ''
+    this.outroInput02 = ''
+    this.sugestao = ''
+    this.outroObjetivo = false
+    this.outroTipoV = false
 
+  }
   ////// CHECKBOX A0 ///////
 
   onChangeA01(event: any) {
@@ -550,6 +600,8 @@ export class Tab3Page {
   onChangeC06(event: any) {
     if (event.detail.checked == true) {
       let valor = "Outros"
+      this.iniciarTimer()
+
       this.outro = true
       this.outroTipoV = true
       this.checkDisableC01 = true
@@ -568,6 +620,31 @@ export class Tab3Page {
     }
   }
 
+  iniciarTimer() {
+    if (this.intervalo) return;
+
+    this.intervalo = setInterval(() => {
+      if (this.tempoRestante > 0) {
+        this.tempoRestante--;
+      } if (this.tempoRestante == 0 && this.outroTipoV == true) {
+        // FASE 01
+
+        this.tipoParentesco = this.outroInput01
+        this.resetarTimer()
+
+
+      }
+    }, 1000);
+  }
+
+
+  resetarTimer() {
+
+    clearInterval(this.intervalo);
+    this.intervalo = null;
+    this.tempoRestante = this.tempoInicial;
+    this.iniciarTimer()
+  }
 
   ////// CHECKBOX D0 ///////
 
@@ -720,6 +797,7 @@ export class Tab3Page {
   onChangeD07(event: any) {
     if (event.detail.checked == true) {
       let valor = "Outro"
+      this.iniciarTimer02()
       this.outroOB = true
       this.outroObjetivo = true
       this.checkDisableD01 = true
@@ -739,6 +817,31 @@ export class Tab3Page {
 
 
     }
+  }
+  iniciarTimer02() {
+    if (this.intervalo02) return;
+
+    this.intervalo02 = setInterval(() => {
+      if (this.tempoRestante02 > 0) {
+        this.tempoRestante02--;
+      } if (this.tempoRestante02 == 0 && this.outroObjetivo == true) {
+        // FASE 01
+
+        this.objetivoSugestao = this.outroInput02
+        this.resetarTimer02()
+
+
+      }
+    }, 1000);
+  }
+
+
+  resetarTimer02() {
+
+    clearInterval(this.intervalo02);
+    this.intervalo02 = null;
+    this.tempoRestante02 = this.tempoInicial02;
+    this.iniciarTimer02()
   }
 
 
