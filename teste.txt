@@ -1,0 +1,276 @@
+// import React, { useState } from 'react';
+// import { CheckCircle, AlertCircle, Info } from 'lucide-react';
+
+// const DependenciaVirtualQuiz = () => {
+//   const [currentQuestion, setCurrentQuestion] = useState(0);
+//   const [answers, setAnswers] = useState({});
+//   const [showResult, setShowResult] = useState(false);
+
+//   const questions = [
+//     {
+//       id: 1,
+//       text: "A pessoa demonstra irritação, ansiedade ou nervosismo quando fica sem o celular ou sem acesso à internet?",
+//       options: [
+//         { text: "Nunca", value: 0 },
+//         { text: "Raramente", value: 1 },
+//         { text: "Às vezes", value: 2 },
+//         { text: "Frequentemente", value: 3 },
+//         { text: "Sempre", value: 4 }
+//       ]
+//     },
+//     {
+//       id: 2,
+//       text: "Você percebe que ela passa mais tempo online do que planejava inicialmente, mesmo quando precisa fazer outras atividades importantes?",
+//       options: [
+//         { text: "Não", value: 0 },
+//         { text: "Raramente", value: 1 },
+//         { text: "Às vezes", value: 2 },
+//         { text: "Muitas vezes", value: 3 },
+//         { text: "Sim, quase sempre", value: 4 }
+//       ]
+//     },
+//     {
+//       id: 3,
+//       text: "A pessoa costuma negligenciar obrigações (estudos, trabalho, tarefas domésticas, compromissos sociais) por passar muito tempo conectada?",
+//       options: [
+//         { text: "Nunca", value: 0 },
+//         { text: "Raramente", value: 1 },
+//         { text: "Às vezes", value: 2 },
+//         { text: "Frequentemente", value: 3 },
+//         { text: "Sempre", value: 4 }
+//       ]
+//     },
+//     {
+//       id: 4,
+//       text: "Ela costuma preferir atividades virtuais (jogos, redes sociais, vídeos, chats) a interações presenciais com amigos ou família?",
+//       options: [
+//         { text: "Não, ela prefere pessoas", value: 0 },
+//         { text: "Às vezes", value: 1 },
+//         { text: "Frequentemente", value: 2 },
+//         { text: "Quase sempre", value: 3 },
+//         { text: "Sempre", value: 4 }
+//       ]
+//     },
+//     {
+//       id: 5,
+//       text: "Você já percebeu que ela mente ou esconde quanto tempo realmente passa online?",
+//       options: [
+//         { text: "Nunca", value: 0 },
+//         { text: "Raramente", value: 1 },
+//         { text: "Às vezes", value: 2 },
+//         { text: "Frequentemente", value: 3 },
+//         { text: "Sempre", value: 4 }
+//       ]
+//     },
+//     {
+//       id: 6,
+//       text: "A pessoa perde o controle e continua usando dispositivos digitais mesmo quando está cansada, atrasada ou sabendo que deve parar?",
+//       options: [
+//         { text: "Não", value: 0 },
+//         { text: "Um pouco", value: 1 },
+//         { text: "Às vezes", value: 2 },
+//         { text: "Frequentemente", value: 3 },
+//         { text: "Sempre", value: 4 }
+//       ]
+//     },
+//     {
+//       id: 7,
+//       text: "O uso excessivo de internet, jogos ou redes sociais tem afetado negativamente a vida dela (sono, humor, alimentação, estudos, relacionamentos)?",
+//       options: [
+//         { text: "Não afetou", value: 0 },
+//         { text: "Afeta pouco", value: 1 },
+//         { text: "Afeta moderadamente", value: 2 },
+//         { text: "Afeta bastante", value: 3 },
+//         { text: "Afeta de forma grave", value: 4 }
+//       ]
+//     }
+//   ];
+
+//   const handleAnswer = (value) => {
+//     const newAnswers = { ...answers, [currentQuestion]: value };
+//     setAnswers(newAnswers);
+
+//     if (currentQuestion < questions.length - 1) {
+//       setTimeout(() => setCurrentQuestion(currentQuestion + 1), 300);
+//     } else {
+//       setTimeout(() => setShowResult(true), 300);
+//     }
+//   };
+
+//   const calculateResult = () => {
+//     const total = Object.values(answers).reduce((sum, val) => sum + val, 0);
+//     const maxScore = 28;
+//     const percentage = (total / maxScore) * 100;
+
+//     if (percentage <= 25) {
+//       return {
+//         level: "Baixo Risco",
+//         color: "bg-green-500",
+//         borderColor: "border-green-500",
+//         icon: CheckCircle,
+//         message: "Os comportamentos observados indicam um uso saudável e equilibrado da tecnologia.",
+//         recommendation: "Continue monitorando e incentivando atividades offline variadas."
+//       };
+//     } else if (percentage <= 50) {
+//       return {
+//         level: "Risco Moderado",
+//         color: "bg-blue-500",
+//         borderColor: "border-blue-500",
+//         icon: Info,
+//         message: "Há sinais de uso excessivo que merecem atenção.",
+//         recommendation: "Converse sobre limites de tempo e promova atividades alternativas. Observe se há mudanças no comportamento."
+//       };
+//     } else if (percentage <= 75) {
+//       return {
+//         level: "Risco Alto",
+//         color: "bg-orange-500",
+//         borderColor: "border-orange-500",
+//         icon: AlertCircle,
+//         message: "Os comportamentos sugerem dependência moderada que pode estar prejudicando aspectos importantes da vida.",
+//         recommendation: "É recomendável buscar orientação profissional. Estabeleça limites claros e ofereça apoio."
+//       };
+//     } else {
+//       return {
+//         level: "Risco Muito Alto",
+//         color: "bg-red-500",
+//         borderColor: "border-red-500",
+//         icon: AlertCircle,
+//         message: "Os sinais indicam forte dependência virtual com impactos significativos no bem-estar.",
+//         recommendation: "Procure ajuda profissional urgentemente. A pessoa pode precisar de acompanhamento psicológico especializado."
+//       };
+//     }
+//   };
+
+//   const restart = () => {
+//     setCurrentQuestion(0);
+//     setAnswers({});
+//     setShowResult(false);
+//   };
+
+//   const goBack = () => {
+//     if (currentQuestion > 0) {
+//       setCurrentQuestion(currentQuestion - 1);
+//     }
+//   };
+
+//   if (showResult) {
+//     const result = calculateResult();
+//     const total = Object.values(answers).reduce((sum, val) => sum + val, 0);
+//     const percentage = Math.round((total / 28) * 100);
+//     const Icon = result.icon;
+
+//     return (
+//       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 flex items-center justify-center">
+//         <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8">
+//           <div className="text-center mb-8">
+//             <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full ${result.color} mb-4`}>
+//               <Icon className="w-10 h-10 text-white" />
+//             </div>
+//             <h2 className="text-3xl font-bold text-gray-800 mb-2">Resultado da Avaliação</h2>
+//             <div className={`inline-block px-6 py-2 rounded-full ${result.color} text-white font-semibold text-lg`}>
+//               {result.level}
+//             </div>
+//           </div>
+
+//           <div className="mb-6">
+//             <div className="flex justify-between items-center mb-2">
+//               <span className="text-sm font-medium text-gray-600">Probabilidade</span>
+//               <span className="text-sm font-bold text-gray-800">{percentage}%</span>
+//             </div>
+//             <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+//               <div 
+//                 className={`h-full ${result.color} transition-all duration-1000 ease-out`}
+//                 style={{ width: `${percentage}%` }}
+//               />
+//             </div>
+//           </div>
+
+//           <div className={`border-l-4 ${result.borderColor} bg-blue-50 p-6 rounded-lg mb-6`}>
+//             <h3 className="font-bold text-gray-800 mb-2 text-lg">Análise:</h3>
+//             <p className="text-gray-700 mb-4">{result.message}</p>
+//             <h3 className="font-bold text-gray-800 mb-2 text-lg">Recomendação:</h3>
+//             <p className="text-gray-700">{result.recommendation}</p>
+//           </div>
+
+//           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+//             <p className="text-sm text-gray-600 italic">
+//               <strong>Nota:</strong> Esta avaliação é apenas indicativa e não substitui diagnóstico profissional. 
+//               Em caso de dúvidas, procure um psicólogo especializado em dependência tecnológica.
+//             </p>
+//           </div>
+
+//           <button
+//             onClick={restart}
+//             className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+//           >
+//             Realizar Nova Avaliação
+//           </button>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 flex items-center justify-center">
+//       <div className="max-w-2xl w-full">
+//         <div className="bg-white rounded-3xl shadow-2xl p-8">
+//           <div className="mb-8">
+//             <div className="flex justify-between items-center mb-4">
+//               <h1 className="text-2xl font-bold text-gray-800">Avaliação de Dependência Virtual</h1>
+//               <span className="text-sm font-medium text-blue-600 bg-blue-100 px-4 py-2 rounded-full">
+//                 {currentQuestion + 1} de {questions.length}
+//               </span>
+//             </div>
+//             <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+//               <div 
+//                 className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500 ease-out"
+//                 style={{ width: `${progress}%` }}
+//               />
+//             </div>
+//           </div>
+
+//           <div className="mb-8">
+//             <h2 className="text-xl font-semibold text-gray-800 mb-6 leading-relaxed">
+//               {questions[currentQuestion].text}
+//             </h2>
+
+//             <div className="space-y-3">
+//               {questions[currentQuestion].options.map((option, index) => (
+//                 <button
+//                   key={index}
+//                   onClick={() => handleAnswer(option.value)}
+//                   className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md ${
+//                     answers[currentQuestion] === option.value
+//                       ? 'border-blue-500 bg-blue-50'
+//                       : 'border-gray-200 bg-white'
+//                   }`}
+//                 >
+//                   <span className="text-gray-700 font-medium">{option.text}</span>
+//                 </button>
+//               ))}
+//             </div>
+//           </div>
+
+//           {currentQuestion > 0 && (
+//             <button
+//               onClick={goBack}
+//               className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2 transition-colors"
+//             >
+//               ← Voltar
+//             </button>
+//           )}
+//         </div>
+
+//         <div className="mt-6 text-center">
+//           <p className="text-sm text-gray-600">
+//             Responda com base no comportamento observado nos últimos 3 meses
+//           </p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default DependenciaVirtualQuiz;

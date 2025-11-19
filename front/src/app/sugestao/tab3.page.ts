@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CidadesPE } from '../serviceMP/cidades-pe';
-import { Api } from '../service/api';
+import { Api } from '../serviceApi/api';
 import { __values } from 'tslib';
-import { timeout } from 'rxjs';
+
 
 @Component({
   selector: 'app-tab3',
