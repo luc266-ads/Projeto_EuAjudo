@@ -15,6 +15,7 @@ export class Tab3Page {
   constructor(private CidadesPE: CidadesPE,
     private Api: Api
   ) { }
+  
   //// VAR TIMER INPUT_OUTROS01 ////
   tempoInicial: number = 1;
   tempoRestante: number = this.tempoInicial;
@@ -25,152 +26,98 @@ export class Tab3Page {
   tempoRestante02: number = this.tempoInicial02;
   intervalo02: any;
 
- ////// ESTRUTURA API //////
+  ////// ESTRUTURA API //////
   sugestoes: {
     sugestao: string;
+    tipoSugestao: string;
     tipoPublico: string;
     tipoParentesco: string;
     objetivoSugestao: string;
-    prevencao: boolean;
-    tratamento: boolean;
-    suporteEmocional: boolean;
-    educacao: boolean;
-    apoioColetivo: boolean;
-    recursosDigitais: boolean;
 
   } = {
       sugestao: '',
+      tipoSugestao: '',
       tipoPublico: '',
       objetivoSugestao: '',
       tipoParentesco: '',
-      prevencao: false,
-      tratamento: false,
-      suporteEmocional: false,
-      educacao: false,
-      apoioColetivo: false,
-      recursosDigitais: false,
-
     };
+    formData = {
+    sugestao: '',
+    categoria: '',
+    publico: '',
+    proximidade: '',
+    objetivo: ''
+  };
+
+  categorias = [
+    'Prevenção',
+    'Diagnóstico',
+    'Conscientização',
+    'Suporte emocional',
+    'Educação',
+    'Recursos digitais',
+    'Comunidade/Apoio mútuo'
+  ];
+
+  publicos = [
+    'Adulto',
+    'Jovem',
+    'Adolescente',
+    'Criança'
+  ];
+
+  proximidades = [
+    'Familiar',
+    'Marido/Esposa',
+    'Filho',
+    'Amigo(a)',
+  ];
+
+  objetivos = [
+    'Reduzir o tempo de uso',
+    'Monitorar a saúde mental',
+    'Promover atividades offline',
+    'Incentivar hábitos saudáveis',
+    'Promover interação social',
+    'Auxiliar na organização da rotina',
+  ];
+
   nome: any = [];
   guardaSugestao: any[] = [];
-  sugestao: string = '';
+  sugestao: string = "";
 
 
   ///// CATEGORIA DA SUGESTÃO //////
 
-  prevencao: boolean = false;
-  tratamento: boolean = false;
-  conscientizaçao: boolean = false;
-  suporteEmocional: boolean = false;
-  educacao: boolean = false;
-  apoioColetivo: boolean = false;
-  recursosDigitais: boolean = false;
+  tipoSugestao: string = ""
+
 
   ////// PUBLICO /////
   tipoPublico: string = ""
-  idosos: boolean = false;
-  adulto: boolean = false;
-  jovem: boolean = false;
-  adolescente: boolean = false;
-  crianca: boolean = false;
+
 
   ///// TIPO DE APROXIMIDADE COM A VITIMA /////
   tipoParentesco: string = ""
   teste: string = ""
   outroInput01: string = ""
-  filhos: boolean = false;
-  pais: boolean = false;
-  companheiro: boolean = false;
-  amigo: boolean = false;
-  avos: boolean = false;
-  outro: boolean = false;
+
 
   //// OBJETIVO PRINCIPAL DA SUGESTÃO ////
 
   objetivoSugestao: string = ""
   outroInput02: string = ""
-  reduzirTL: boolean = false;
-  MelhorarSM: boolean = false;
-  autocontrole: boolean = false;
-  habitosSD: boolean = false;
-  relacaoSocial: boolean = false;
-  organizarRT: boolean = false;
   outroOB: boolean = false;
+  outro: boolean = false;
 
 
 
-  ////////// CHECK A0 ////////
-  checkA01: boolean = false;
-  checkA02: boolean = false;
-  checkA03: boolean = false;
-  checkA04: boolean = false;
-  checkA05: boolean = false;
-  checkA06: boolean = false;
-  checkA07: boolean = false;
-
-  checkDisableA01: boolean = false;
-  checkDisableA02: boolean = false;
-  checkDisableA03: boolean = false;
-  checkDisableA04: boolean = false;
-  checkDisableA05: boolean = false;
-  checkDisableA06: boolean = false;
-  checkDisableA07: boolean = false;
-
-
-  ////////// CHECK B0 ////////
-
-  checkB01: boolean = false;
-  checkB02: boolean = false;
-  checkB03: boolean = false;
-  checkB04: boolean = false;
-  checkB05: boolean = false;
-
-  checkDisableB01: boolean = false;
-  checkDisableB02: boolean = false;
-  checkDisableB03: boolean = false;
-  checkDisableB04: boolean = false;
-  checkDisableB05: boolean = false;
-
-  /////// CHECK C0 /////////
-
-  checkC01: boolean = false;
-  checkC02: boolean = false;
-  checkC03: boolean = false;
-  checkC04: boolean = false;
-  checkC05: boolean = false;
-  checkC06: boolean = false;
-
-  checkDisableC01: boolean = false;
-  checkDisableC02: boolean = false;
-  checkDisableC03: boolean = false;
-  checkDisableC04: boolean = false;
-  checkDisableC05: boolean = false;
-  checkDisableC06: boolean = false;
-
-  ////// CHECK D0 /////////
-
-  checkD01: boolean = false;
-  checkD02: boolean = false;
-  checkD03: boolean = false;
-  checkD04: boolean = false;
-  checkD05: boolean = false;
-  checkD06: boolean = false;
-  checkD07: boolean = false;
-
-  checkDisableD01: boolean = false;
-  checkDisableD02: boolean = false;
-  checkDisableD03: boolean = false;
-  checkDisableD04: boolean = false;
-  checkDisableD05: boolean = false;
-  checkDisableD06: boolean = false;
-  checkDisableD07: boolean = false;
 
 
   ///// CADS /////
 
   buscarCidade: boolean = false;
-  bodySugestao: boolean = false;
-  bodyCalendario: boolean = true;
+  bodySugestao: boolean = true;
+  bodyCalendario: boolean = false;
   sugestaoOk: boolean = false;
   sugestaoNaoOk: boolean = false;
   menuEncontro: boolean = false;
@@ -212,20 +159,39 @@ export class Tab3Page {
 
   }
 
+ submitted = false;
 
-  ideiaOk() {
-    // Monta o objeto ANTES da requisição
+  handleReset() {
+    this.formData = {
+      sugestao: '',
+      categoria: '',
+      publico: '',
+      proximidade: '',
+      objetivo: ''
+    };
+    this.submitted = false;
+  }
+  handleSubmit() {
+    if (
+      this.formData.sugestao.trim() &&
+      this.formData.categoria &&
+      this.formData.publico &&
+      this.formData.proximidade &&
+      this.formData.objetivo
+      
+    ) {
+      this.submitted = true;
+      console.log('Dados enviados:', this.formData);
+      
+    }
+      // Monta o objeto ANTES da requisição
     this.sugestoes = {
-      sugestao: this.sugestao,
-      tipoPublico: this.tipoPublico,
-      tipoParentesco: this.tipoParentesco,
-      objetivoSugestao: this.objetivoSugestao,
-      prevencao: this.prevencao,
-      tratamento: this.tratamento,
-      suporteEmocional: this.suporteEmocional,
-      educacao: this.educacao,
-      apoioColetivo: this.apoioColetivo,
-      recursosDigitais: this.recursosDigitais,
+      sugestao:  this.formData.sugestao,
+      tipoSugestao: this.formData.categoria,
+      tipoPublico: this.formData.publico,
+      tipoParentesco:  this.formData.proximidade,
+      objetivoSugestao: this.formData.objetivo,
+
 
     };
 
@@ -236,16 +202,10 @@ export class Tab3Page {
         // Limpa o formulário
 
         this.sugestao = '';
+        this.tipoSugestao = '';
         this.tipoPublico = '';
         this.tipoParentesco = '';
         this.objetivoSugestao = '';
-        this.prevencao = false;
-        this.tratamento = false;
-        this.suporteEmocional = false;
-        this.educacao = false;
-        this.apoioColetivo = false;
-        this.recursosDigitais = false;
-
 
       },
       error: (err) => {
@@ -253,27 +213,6 @@ export class Tab3Page {
         this.sugestaoNaoOk = true;
       },
     });
-
-    
-    this.bodySugestao = false
-    this.checkDisableB01 = false
-    this.checkDisableB02 = false
-    this.checkDisableB03 = false
-    this.checkDisableB04 = false
-    this.checkDisableB05 = false
-    this.checkDisableC01 = false
-    this.checkDisableC02 = false
-    this.checkDisableC03 = false
-    this.checkDisableC04 = false
-    this.checkDisableC05 = false
-    this.checkDisableC06 = false
-    this.checkDisableD01 = false
-    this.checkDisableD02 = false
-    this.checkDisableD03 = false
-    this.checkDisableD04 = false
-    this.checkDisableD05 = false
-    this.checkDisableD06 = false
-    this.checkDisableD07 = false
   }
 
   listarSugestões() {
@@ -331,7 +270,7 @@ export class Tab3Page {
 
 
   }
-  voltarSugetaoNaoOk(){
+  voltarSugetaoNaoOk() {
     this.sugestaoNaoOk = false;
     this.bodySugestao = true;
     this.outroInput01 = ''
@@ -341,262 +280,8 @@ export class Tab3Page {
     this.outroTipoV = false
 
   }
-  ////// CHECKBOX A0 ///////
-
-  onChangeA01(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Prenveção"
-      this.prevencao = true
-
-    }
-  }
-  onChangeA02(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Tratamento"
-      this.tratamento = true
-    }
-  }
-  onChangeA03(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Conscientização"
-      this.conscientizaçao = true
-    }
-  }
-  onChangeA04(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Suporte emocional"
-      this.suporteEmocional = true
-    }
-  }
-  onChangeA05(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Educação"
-      this.educacao = true
-    }
-  }
-  onChangeA06(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Recursos digitais"
-      this.recursosDigitais = true
-    }
-  }
-  onChangeA07(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Comunidade/Apoio coletivo"
-      this.apoioColetivo = true
-    }
-  }
 
 
-  ////// CHECKBOX B0 ///////
-
-  onChangeB01(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Idosos"
-      this.tipoPublico = valor;
-      this.idosos = true
-      this.checkDisableB02 = true
-      this.checkDisableB03 = true
-      this.checkDisableB04 = true
-      this.checkDisableB05 = true
-    } else {
-      this.tipoPublico = "";
-      this.checkDisableB02 = false
-      this.checkDisableB03 = false
-      this.checkDisableB04 = false
-      this.checkDisableB05 = false
-
-
-    }
-  }
-  onChangeB02(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Adulto"
-      this.tipoPublico = valor;
-      this.adulto = true
-      this.checkDisableB01 = true
-      this.checkDisableB03 = true
-      this.checkDisableB04 = true
-      this.checkDisableB05 = true
-    } else {
-      this.tipoPublico = "";
-      this.checkDisableB01 = false
-      this.checkDisableB03 = false
-      this.checkDisableB04 = false
-      this.checkDisableB05 = false
-
-
-    }
-  }
-  onChangeB03(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Jovem"
-      this.tipoPublico = valor;
-      this.jovem = true
-      this.checkDisableB01 = true
-      this.checkDisableB02 = true
-      this.checkDisableB04 = true
-      this.checkDisableB05 = true
-    } else {
-      this.tipoPublico = "";
-      this.checkDisableB01 = false
-      this.checkDisableB02 = false
-      this.checkDisableB04 = false
-      this.checkDisableB05 = false
-
-
-    }
-  }
-  onChangeB04(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Adolescente"
-      this.tipoPublico = valor;
-      this.adolescente = true
-      this.checkDisableB01 = true
-      this.checkDisableB02 = true
-      this.checkDisableB03 = true
-      this.checkDisableB05 = true
-    } else {
-      this.tipoPublico = "";
-      this.checkDisableB01 = false
-      this.checkDisableB02 = false
-      this.checkDisableB03 = false
-      this.checkDisableB05 = false
-
-
-    }
-  }
-  onChangeB05(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Criança"
-      this.tipoPublico = valor;
-      this.crianca = true
-      this.checkDisableB01 = true
-      this.checkDisableB02 = true
-      this.checkDisableB03 = true
-      this.checkDisableB04 = true
-    } else {
-      this.tipoPublico = "";
-      this.checkDisableB01 = false
-      this.checkDisableB02 = false
-      this.checkDisableB03 = false
-      this.checkDisableB04 = false
-
-
-    }
-  }
-
-  ////// CHECKBOX C0 ///////
-
-  onChangeC01(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "filho(a)"
-      this.tipoParentesco = valor;
-      this.filhos = true
-      this.checkDisableC02 = true
-      this.checkDisableC03 = true
-      this.checkDisableC04 = true
-      this.checkDisableC05 = true
-      this.checkDisableC06 = true
-
-    } else {
-      this.tipoParentesco = "";
-      this.checkDisableC02 = false
-      this.checkDisableC03 = false
-      this.checkDisableC04 = false
-      this.checkDisableC05 = false
-      this.checkDisableC06 = false
-
-
-    }
-  }
-  onChangeC02(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Pais"
-      this.tipoParentesco = valor;
-      this.pais = true
-      this.checkDisableC01 = true
-      this.checkDisableC03 = true
-      this.checkDisableC04 = true
-      this.checkDisableC05 = true
-      this.checkDisableC06 = true
-
-    } else {
-      this.tipoParentesco = "";
-      this.checkDisableC01 = false
-      this.checkDisableC03 = false
-      this.checkDisableC04 = false
-      this.checkDisableC05 = false
-      this.checkDisableC06 = false
-
-
-    }
-  }
-  onChangeC03(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Companheiro(a)"
-      this.tipoParentesco = valor;
-      this.companheiro = true
-      this.checkDisableC01 = true
-      this.checkDisableC02 = true
-      this.checkDisableC04 = true
-      this.checkDisableC05 = true
-      this.checkDisableC06 = true
-
-    } else {
-      this.tipoParentesco = "";
-      this.checkDisableC01 = false
-      this.checkDisableC02 = false
-      this.checkDisableC04 = false
-      this.checkDisableC05 = false
-      this.checkDisableC06 = false
-
-
-    }
-  }
-  onChangeC04(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Avo(a)"
-      this.tipoParentesco = valor;
-      this.avos = true
-      this.checkDisableC01 = true
-      this.checkDisableC02 = true
-      this.checkDisableC03 = true
-      this.checkDisableC05 = true
-      this.checkDisableC06 = true
-
-    } else {
-      this.tipoParentesco = "";
-      this.checkDisableC01 = false
-      this.checkDisableC02 = false
-      this.checkDisableC03 = false
-      this.checkDisableC05 = false
-      this.checkDisableC06 = false
-
-
-    }
-  }
-  onChangeC05(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Amigo(a)"
-      this.tipoParentesco = valor;
-      this.amigo = true
-      this.checkDisableC01 = true
-      this.checkDisableC02 = true
-      this.checkDisableC03 = true
-      this.checkDisableC04 = true
-      this.checkDisableC06 = true
-    } else {
-      this.tipoParentesco = "";
-      this.checkDisableC01 = false
-      this.checkDisableC02 = false
-      this.checkDisableC03 = false
-      this.checkDisableC04 = false
-      this.checkDisableC06 = false
-
-
-    }
-  }
   onChangeC06(event: any) {
     if (event.detail.checked == true) {
       let valor = "Outros"
@@ -604,18 +289,10 @@ export class Tab3Page {
 
       this.outro = true
       this.outroTipoV = true
-      this.checkDisableC01 = true
-      this.checkDisableC02 = true
-      this.checkDisableC03 = true
-      this.checkDisableC04 = true
-      this.checkDisableC05 = true
+
     } else {
 
-      this.checkDisableC01 = false
-      this.checkDisableC02 = false
-      this.checkDisableC03 = false
-      this.checkDisableC04 = false
-      this.checkDisableC05 = false
+
       this.outroTipoV = false
     }
   }
@@ -649,171 +326,16 @@ export class Tab3Page {
   ////// CHECKBOX D0 ///////
 
 
-  onChangeD01(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Reduzir o tempo de tela"
-      this.objetivoSugestao = valor;
-      this.reduzirTL = true
-      this.checkDisableD02 = true
-      this.checkDisableD03 = true
-      this.checkDisableD04 = true
-      this.checkDisableD05 = true
-      this.checkDisableD06 = true
-      this.checkDisableD07 = true
-
-    } else {
-      this.objetivoSugestao = "";
-      this.checkDisableD02 = false
-      this.checkDisableD03 = false
-      this.checkDisableD04 = false
-      this.checkDisableD05 = false
-      this.checkDisableD06 = false
-      this.checkDisableD07 = false
-
-
-    }
-  }
-  onChangeD02(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Melhorar a saúde mental"
-      this.objetivoSugestao = valor;
-      this.MelhorarSM = true
-      this.checkDisableD01 = true
-      this.checkDisableD03 = true
-      this.checkDisableD04 = true
-      this.checkDisableD05 = true
-      this.checkDisableD06 = true
-      this.checkDisableD07 = true
-
-    } else {
-      this.objetivoSugestao = "";
-      this.checkDisableD01 = false
-      this.checkDisableD03 = false
-      this.checkDisableD04 = false
-      this.checkDisableD05 = false
-      this.checkDisableD06 = false
-      this.checkDisableD07 = false
-
-
-    }
-  }
-  onChangeD03(event: any) {
-    if (event.detail.checked == true) {
-      let valor = " Melhorar relações sociais"
-      this.objetivoSugestao = valor;
-      this.relacaoSocial = true
-      this.checkDisableD01 = true
-      this.checkDisableD02 = true
-      this.checkDisableD04 = true
-      this.checkDisableD05 = true
-      this.checkDisableD06 = true
-      this.checkDisableD07 = true
-
-    } else {
-      this.objetivoSugestao = "";
-      this.checkDisableD01 = false
-      this.checkDisableD02 = false
-      this.checkDisableD04 = false
-      this.checkDisableD05 = false
-      this.checkDisableD06 = false
-      this.checkDisableD07 = false
-
-
-    }
-  }
-  onChangeD04(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Aumentar o autocontrole"
-      this.objetivoSugestao = valor;
-      this.autocontrole = true
-      this.checkDisableD01 = true
-      this.checkDisableD02 = true
-      this.checkDisableD03 = true
-      this.checkDisableD05 = true
-      this.checkDisableD06 = true
-      this.checkDisableD07 = true
-
-    } else {
-      this.objetivoSugestao = "";
-      this.checkDisableD01 = false
-      this.checkDisableD02 = false
-      this.checkDisableD03 = false
-      this.checkDisableD05 = false
-      this.checkDisableD06 = false
-      this.checkDisableD07 = false
-
-
-    }
-  }
-  onChangeD05(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Incentivar hábitos saudáveis"
-      this.objetivoSugestao = valor;
-      this.habitosSD = true
-      this.checkDisableD01 = true
-      this.checkDisableD02 = true
-      this.checkDisableD03 = true
-      this.checkDisableD04 = true
-      this.checkDisableD06 = true
-      this.checkDisableD07 = true
-
-    } else {
-      this.objetivoSugestao = "";
-      this.checkDisableD01 = false
-      this.checkDisableD02 = false
-      this.checkDisableD03 = false
-      this.checkDisableD04 = false
-      this.checkDisableD06 = false
-      this.checkDisableD07 = false
-
-
-    }
-  }
-  onChangeD06(event: any) {
-    if (event.detail.checked == true) {
-      let valor = "Auxiliar na organização da rotina"
-      this.objetivoSugestao = valor;
-      this.organizarRT = true
-      this.checkDisableD01 = true
-      this.checkDisableD02 = true
-      this.checkDisableD03 = true
-      this.checkDisableD04 = true
-      this.checkDisableD05 = true
-      this.checkDisableD07 = true
-
-    } else {
-      this.objetivoSugestao = "";
-      this.checkDisableD01 = false
-      this.checkDisableD02 = false
-      this.checkDisableD03 = false
-      this.checkDisableD04 = false
-      this.checkDisableD05 = false
-      this.checkDisableD07 = false
-
-
-
-    }
-  }
   onChangeD07(event: any) {
     if (event.detail.checked == true) {
       let valor = "Outro"
       this.iniciarTimer02()
       this.outroOB = true
       this.outroObjetivo = true
-      this.checkDisableD01 = true
-      this.checkDisableD02 = true
-      this.checkDisableD03 = true
-      this.checkDisableD04 = true
-      this.checkDisableD05 = true
-      this.checkDisableD06 = true
+
     } else {
       this.outroObjetivo = false
-      this.checkDisableD01 = false
-      this.checkDisableD02 = false
-      this.checkDisableD03 = false
-      this.checkDisableD04 = false
-      this.checkDisableD05 = false
-      this.checkDisableD06 = false
+
 
 
     }

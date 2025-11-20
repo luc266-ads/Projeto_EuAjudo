@@ -45,34 +45,26 @@ app.get("/api/sugestoes", (req, res) => {
 
 app.post("/api/sugestoes", (req, res) => {
   const {
-    sugestao,        
+    sugestao,
+    tipoSugestao,        
     tipoPublico,
     tipoParentesco,
     objetivoSugestao,
-    prevencao,
-    tratamento,
-    suporteEmocional,
-    educacao,
-    apoioColetivo,
-    recursosDigitais,
+
   } = req.body;
 
-  if (!sugestao || !tipoPublico || !tipoParentesco || !objetivoSugestao) {
+  if (!sugestao || !tipoPublico || !tipoParentesco || !objetivoSugestao || !tipoSugestao) {
     return res.status(400).json({ error: "Preencha todos os campos!" });
   }
 
   const novaSugestao = {
     id: Date.now(),
     sugestao,
+    tipoSugestao,
     tipoPublico,
     tipoParentesco,
     objetivoSugestao,
-    prevencao,
-    tratamento,
-    suporteEmocional,
-    educacao,
-    apoioColetivo,
-    recursosDigitais,
+
   };
 
   sugestoes.push(novaSugestao);

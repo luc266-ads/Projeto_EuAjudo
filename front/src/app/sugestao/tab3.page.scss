@@ -1,3 +1,126 @@
+.container {
+  background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.header {
+  background: linear-gradient(to right, #1e88e5, #1565c0);
+  padding: 24px;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+}
+
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+}
+
+.field {
+  margin-bottom: 28px;
+
+  label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+    color: #333;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    transition: .2s;
+    resize: none;
+
+    &:focus {
+      border-color: #1e88e5;
+      outline: none;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  button {
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 14px;
+    background: white;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    transition: .2s;
+
+    .radio {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #aaa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+
+    .radio-dot {
+      width: 12px;
+      height: 12px;
+      background: #1e88e5;
+      border-radius: 50%;
+    }
+
+    &.selected {
+      border-color: #1e88e5;
+      background: #e3f2fd;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+
+      .radio {
+        border-color: #1e88e5;
+      }
+    }
+
+    &:hover {
+      background: #e3f2fd;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  flex: 1;
+  background-color: #1565c0;
+  color: white;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: bold;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, .2);
+}
+
+.btn-secondary {
+  flex: 1;
+  background: #ddd;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: bold;
+}
+/////////////
+
 .bodyCalendario {
     animation: aparecer 0.6s ease-in-out;
     background: linear-gradient(to top, #1565c0, #2196f3);
@@ -306,7 +429,6 @@ font-size: large;
     border-end-end-radius: 20px;
     border-end-start-radius: 20px;
     height: 140px;
-
     display: flex;
 }
 
@@ -321,25 +443,13 @@ font-size: large;
     animation: aparecer 0.6s ease-in-out;
     border-end-end-radius: 20px;
     border-end-start-radius: 20px;
-    height: 120px;
+    height: 170px;
     width: 100%;
     margin-left: 10px;
     margin-right: 10px;
 
 }
 
-#botaoSugestão {
-
-    color: white;
-    background-color: #0d47a1;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 5%;
-    height: 2pc;
-    width: 9pc;
-
-
-}
 
 .azul {
     color: #0d47a1;
@@ -391,17 +501,9 @@ color: #2196f3;
     }
 }
 
-.checkbox {
-    display: flex;
-    justify-content: start;
-    align-items: center;
 
-}
 
-#checkboxContent {
-    margin-left: 10px;
-    color: white;
-}
+
 .outro01{
     animation: aparecer 0.4s ease-in-out;
     

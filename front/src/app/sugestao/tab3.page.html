@@ -28,14 +28,20 @@
   </div>
   <div *ngIf="sugestaoOk" id="sugestaoOk">
     <div id="sugestaoContet">
-      <h3>Ideia Enviada com <span class="azul">SUCESSO!!</span></h3>
-      <button id="botaoSugestão" (click)="voltarSugestaoOk()"> Voltar</button>
+     <h3>Sugestão Enviada com <span class="azul">SUCESSO!!</span></h3>
+      <p class="msg">
+        Obrigado por contribuir para melhorar nosso projeto. Sua opinião é muito importante!
+      </p>
+       <button class="btn-primary" (click)="voltarSugestaoOk()" >
+        Voltar
+      </button>
     </div>
 
   </div>
-    <div *ngIf="sugestaoNaoOk" id="sugestaoOk">
+  <div *ngIf="sugestaoNaoOk" id="sugestaoOk">
     <div id="sugestaoContet">
       <h3>Ideia Não Enviada ,<span class="azul">Tente Novamente!!</span></h3>
+
       <button id="botaoSugestão" (click)="voltarSugetaoNaoOk()">Voltar</button>
     </div>
 
@@ -653,225 +659,98 @@
       </ion-item>
     </ion-list>
   </div>
-  <div class="bodySugestao left-panel slide-in-left" [ngStyle]="bodySugestaoStyle" *ngIf="bodySugestao">
 
-    <br>
-    <br>
-    <br>
 
-    <div class="minhaSugestao">
-      <h1 id="titleSugestao">Deixe a Sua Sugestao de Melhoria</h1>
-      <div id="dataEncontro">
-        <h1 id="subtitleSugestao">Escreva sua Sugestão</h1>
-      </div>
 
-      <ion-card color="secondary">
-        <ion-card-content>
-          <div id="InputCor">
-            <ion-input label="Sugestao:" fill="outline" placeholder="Digite aqui" [(ngModel)]="sugestao"></ion-input>
-          </div>
-          <hr>
-          <h1>Em qual categoria essa sugestão se encaixa melhor?</h1>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA01($event)" [checked]="checkA01" [disabled] = "checkDisableA01" ></ion-checkbox>
+  <!-- Formulário -->
+  <div *ngIf="!submitted" class="container">
 
-            <p id="checkboxContent">Prevenção</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA02($event)" [checked]="checkA02" [disabled] = "checkDisableA02" ></ion-checkbox>
-
-            <p id="checkboxContent">Tratamento</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA03($event)" [checked]="checkA03" [disabled] = "checkDisableA03" ></ion-checkbox>
-
-            <p id="checkboxContent">Conscientização</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA04($event)" [checked]="checkA04" [disabled] = "checkDisableA04" ></ion-checkbox>
-
-            <p id="checkboxContent">Suporte emocional</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA05($event)" [checked]="checkA05" [disabled] = "checkDisableA05" ></ion-checkbox>
-
-            <p id="checkboxContent">Educação</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA06($event)" [checked]="checkA06" [disabled] = "checkDisableA06" ></ion-checkbox>
-
-            <p id="checkboxContent">Recursos digitais</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeA07($event)" [checked]="checkA07" [disabled] = "checkDisableA01" ></ion-checkbox>
-
-            <p id="checkboxContent">Comunidade/Apoio coletivo</p>
-
-          </div>
-          <hr>
-
-          <h1> Essa sugestão é voltada para qual público</h1>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeB01($event)" [checked]="checkB01"  [disabled] = "checkDisableB01" ></ion-checkbox>
-
-            <p id="checkboxContent"> Idoso</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeB02($event)" [checked]="checkB02" [disabled] = "checkDisableB02"></ion-checkbox>
-
-            <p id="checkboxContent"> Adulto</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeB03($event)" [checked]="checkB03"  [disabled] = "checkDisableB03" ></ion-checkbox>
-
-            <p id="checkboxContent"> Jovem</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeB04($event)" [checked]="checkB04"  [disabled] = "checkDisableB04" ></ion-checkbox>
-
-            <p id="checkboxContent">Adolescente</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeB05($event)" [checked]="checkB05"  [disabled] = "checkDisableB05" > </ion-checkbox>
-
-            <p id="checkboxContent">Criança</p>
-
-          </div>
-
-
-          <hr>
-
-          <h1> Que tipo de proximidade se tem com esta vitima? </h1>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeC01($event)" [checked]="checkC01" [disabled] = "checkDisableC01" ></ion-checkbox>
-
-            <p id="checkboxContent">filho/filha</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeC02($event)" [checked]="checkC02" [disabled] = "checkDisableC02" ></ion-checkbox>
-
-            <p id="checkboxContent">Pais</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeC03($event)" [checked]="checkC03" [disabled] = "checkDisableC03" ></ion-checkbox>
-
-            <p id="checkboxContent">Marido/Esposa</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeC04($event)" [checked]="checkC04" [disabled] = "checkDisableC04" ></ion-checkbox>
-
-            <p id="checkboxContent">Avós</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeC05($event)" [checked]="checkC05" [disabled] = "checkDisableC05" > </ion-checkbox>
-
-            <p id="checkboxContent">Amigo(a)</p>
-
-          </div>
-
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeC06($event)" [checked]="checkC06" [disabled] = "checkDisableC06" > </ion-checkbox>
-
-            <p id="checkboxContent">Outro</p>
-          </div>
-          <div *ngIf="outroTipoV" class="outro01">
-            <br>
-            <div id="InputCor">
-              <ion-input label="Outro:" fill="outline" placeholder="Digite aqui" [(ngModel)]="outroInput01"></ion-input>
-            </div>
-          </div>
-
-          <hr>
-
-          <h1> Qual é o objetivo principal dessa sugestão?</h1>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD01($event)" [checked]="checkD01" [disabled] = "checkDisableD01" ></ion-checkbox>
-
-            <p id="checkboxContent">Reduzir o tempo de tela</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD02($event)" [checked]="checkD02" [disabled] = "checkDisableD02" ></ion-checkbox>
-
-            <p id="checkboxContent">Melhorar a saúde mental</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD03($event)" [checked]="checkD03" [disabled] = "checkDisableD03" ></ion-checkbox>
-
-            <p id="checkboxContent">Aumentar o autocontrole</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD04($event)" [checked]="checkD04" [disabled] = "checkDisableD04" ></ion-checkbox>
-
-            <p id="checkboxContent">Incentivar hábitos saudáveis</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD05($event)" [checked]="checkD05" [disabled] = "checkDisableD05" > </ion-checkbox>
-
-            <p id="checkboxContent">Melhorar relações sociais</p>
-
-          </div>
-
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD06($event)" [checked]="checkD06" [disabled] = "checkDisableD06" > </ion-checkbox>
-
-            <p id="checkboxContent">Auxiliar na organização da rotina</p>
-
-          </div>
-          <div class="checkbox">
-            <ion-checkbox (ionChange)="onChangeD07($event)" [checked]="checkD07" [disabled] = "checkDisableD07" > </ion-checkbox>
-
-            <p id="checkboxContent">Outro</p>
-
-          </div>
-
-          <div *ngIf="outroObjetivo" class="outro02">
-
-            <br>
-            <div id="InputCor">
-              <ion-input label="Outro:" fill="outline" placeholder="Digite aqui" [(ngModel)]="outroInput02"></ion-input>
-            </div>
-
-          </div>
-
-          <!-- <hr>
-
-          <div id="cidades">
-            <h1>Qual municipio que deseja atingir ?</h1>
-            <button id="botaoMunicipio" (click)="procurarMunicipio()">Escolhar Cidade</button>
-          </div>
-          <p id="tipoCidade">Cidade: <Span class="azulClaro">{{cidade}}</Span></p>
-          <hr> -->
-
-
-        </ion-card-content>
-      </ion-card>
-
-      <div id="dataRodape">
-      </div>
+    <div class="header">
+      <h1>Deixe a Sua Sugestão de Melhoria</h1>
     </div>
-    <div class="botaosEncontros">
-      <button id="botaoEncontro" (click)="voltarCalendario()"> Voltar</button>
-      <button id="botaoEncontro" (click)="ideiaOk()"> Enviar Ideia</button>
+
+    <div class="card">
+
+      <!-- Sugestão -->
+      <div class="field">
+        <label>Escreva sua Sugestão</label>
+
+        <textarea [(ngModel)]="formData.sugestao" placeholder="Digite aqui sua sugestão..."></textarea>
+      </div>
+
+      <!-- Categoria -->
+      <div class="field">
+        <label>Em qual categoria essa sugestão se encaixa melhor?</label>
+
+        <div class="grid">
+          <button *ngFor="let cat of categorias" (click)="formData.categoria = cat"
+            [class.selected]="formData.categoria === cat">
+            <span class="radio">
+              <span *ngIf="formData.categoria === cat" class="radio-dot"></span>
+            </span>
+
+            {{ cat }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Público -->
+      <div class="field">
+        <label>Essa sugestão é voltada para qual público?</label>
+
+        <div class="grid">
+          <button *ngFor="let pub of publicos" (click)="formData.publico = pub"
+            [class.selected]="formData.publico === pub">
+            <span class="radio">
+              <span *ngIf="formData.publico === pub" class="radio-dot"></span>
+            </span>
+
+            {{ pub }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Proximidade -->
+      <div class="field">
+        <label>Que tipo de proximidade se tem com esta vítima?</label>
+
+        <div class="grid">
+          <button *ngFor="let prox of proximidades" (click)="formData.proximidade = prox"
+            [class.selected]="formData.proximidade === prox">
+            <span class="radio">
+              <span *ngIf="formData.proximidade === prox" class="radio-dot"></span>
+            </span>
+
+            {{ prox }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Objetivo -->
+      <div class="field">
+        <label>Qual é o objetivo principal dessa sugestão?</label>
+
+        <div class="grid">
+          <button *ngFor="let obj of objetivos" (click)="formData.objetivo = obj"
+            [class.selected]="formData.objetivo === obj">
+            <span class="radio">
+              <span *ngIf="formData.objetivo === obj" class="radio-dot"></span>
+            </span>
+
+            {{ obj }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="actions">
+        <button class="btn-secondary" (click)="handleReset()">Voltar</button>
+
+        <button class="btn-primary" (click)="handleSubmit()">Enviar Ideia</button>
+      </div>
     </div>
   </div>
+
 
   <div class="bodyCalendario" [ngStyle]="bodyCalendarioStyle" *ngIf="bodyCalendario">
 
