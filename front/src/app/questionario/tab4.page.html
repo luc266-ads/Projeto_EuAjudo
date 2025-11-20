@@ -13,83 +13,77 @@
     </ion-toolbar>
   </ion-header>
 
-<div class="questionario">
-<br>
-  <!-- RESULTADO -->
-  <ng-container *ngIf="showResult; else quizBlock">
-    <div class="result-container">
+  <div class="questionario">
+    <br>
+    <!-- RESULTADO -->
+    <ng-container *ngIf="showResult; else quizBlock">
+      <div class="result-container">
 
-      <div class="result-icon" [ngClass]="calculateResult().color">
-        <ion-icon name="alert-circle-outline"></ion-icon>
-      </div>
+        <div class="result-icon" [ngClass]="calculateResult().color">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
 
-      <h2 class="title">Resultado da Avaliação</h2>
+        <h2 class="title">Resultado da Avaliação</h2>
 
-      <div class="tag" [ngClass]="calculateResult().color">
-        {{ calculateResult().level }}
-      </div>
+        <div class="tag" [ngClass]="calculateResult().color">
+          {{ calculateResult().level }}
+        </div>
 
-      <div class="progress-wrapper">
-        <div class="progress-bar" [style.width.%]="getProgressPercent()"></div>
-      </div>
+        <div class="progress-wrapper">
+          <div class="progress-bar" [style.width.%]="getProgressPercent()"></div>
+        </div>
 
-      <div class="analysis-card">
-        <h3>Análise</h3>
-        <p>{{ calculateResult().message }}</p>
+        <div class="analysis-card">
+          <h3>Análise</h3>
+          <p>{{ calculateResult().message }}</p>
 
-        <h3>Recomendação</h3>
-        <p>{{ calculateResult().recommendation }}</p>
-      </div>
-      <div class="botaoResultado">
-      <ion-button expand="block" color="primary" (click)="restart()">Nova Avaliação</ion-button>
-      <ion-button expand="block" color="primary" (click)="restart()">Proximo</ion-button>
-      </div>
-    </div>
-  </ng-container>
-
-  <!-- QUIZ -->
-  
-  <ng-template #quizBlock >
-    <div class="quiz-container">
-
-      <div class="header">
-        <h1>Avaliação de Dependência Virtual</h1>
-      <div class="counter">
-        <p > {{ currentQuestion + 1 }} de {{ questions.length }}</p>
+          <h3>Recomendação</h3>
+          <p>{{ calculateResult().recommendation }}</p>
+        </div>
+        <div class="botaoResultado">
+           <button class="btn-secondary" (click)="restart()">Nova Avaliação</button>
+          <button class="btn-primary">Proximo</button>
         </div>
       </div>
+      <br>
+    </ng-container>
 
-      <div class="progress">
-        <div class="progress-inner" [style.width.%]="((currentQuestion + 1)/questions.length)*100"></div>
-      </div>
+    <!-- QUIZ -->
 
-      <h2 class="question-text">{{ questions[currentQuestion].text }}</h2>
+    <ng-template #quizBlock>
+      <div class="quiz-container">
 
-      <div class="options">
-        <ion-button 
-          *ngFor="let option of questions[currentQuestion].options"
-          expand="block"
-          (click)="handleAnswer(option.value)"
-        >
-          {{ option.text }}
+        <div class="header">
+          <h1>Avaliação de Dependência Virtual</h1>
+          <div class="counter">
+            <p> {{ currentQuestion + 1 }} de {{ questions.length }}</p>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-inner" [style.width.%]="((currentQuestion + 1)/questions.length)*100"></div>
+        </div>
+
+        <h2 class="question-text">{{ questions[currentQuestion].text }}</h2>
+
+        <div class="options">
+          <button *ngFor="let option of questions[currentQuestion].options" expand="block"
+            (click)="handleAnswer(option.value)" class="btn-primary">
+            {{ option.text }}
+          </button>
+        </div>
+
+        <ion-button *ngIf="currentQuestion > 0" fill="clear" (click)="goBack()">
+          ← Voltar
         </ion-button>
+        <br>
       </div>
+    </ng-template>
 
-      <ion-button 
-        *ngIf="currentQuestion > 0"
-        fill="clear"
-        (click)="goBack()"
-      >
-        ← Voltar
-      </ion-button>
-     <br>
-    </div>
-  </ng-template>
-  
-</div>
-<p class="note">Responda com base nos últimos 3 meses.</p>
+  </div>
+  <p class="note">Responda com base nos últimos 3 meses.</p>
 
 
- 
+
 
 </ion-content>
