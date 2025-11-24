@@ -1,0 +1,253 @@
+<ion-toolbar>
+  <div class="toolbar">
+    <ion-button fill="clear" class="menubotao" (click)=EncontroLeft()>Menu</ion-button>
+    <div id="titleToolbar">
+      <h1>Encontros</h1>
+    </div>
+  </div>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="menuEncontro" class="panel left-panel slide-in-left">
+    <div>
+      <ion-button fill="clear" expand="block">Informação</ion-button>
+      <hr>
+      <ion-button fill="clear" expand="block">Quem Somos</ion-button>
+      <hr>
+      <ion-button fill="clear" expand="block">O Programa</ion-button>
+      <hr>
+      <ion-button fill="clear" expand="block">Sair</ion-button>
+      <hr>
+    </div>
+  </div>
+
+  <div>
+    <div class="tela">
+      <div class="container">
+
+        <!-- HEADER -->
+        <header class="cabecalho">
+          <div class="cabecalho-box">
+            <ion-icon name="heart" class="icon-pink"></ion-icon>
+            <h1>Espaços de Acolhimento</h1>
+          </div>
+          <p class="subtitulo">
+            Conheça os principais serviços de apoio à saúde mental disponíveis para você
+          </p>
+        </header>
+
+        <!-- LISTA -->
+        <div *ngIf="!mostrarDetalhes">
+
+          <div class="cards">
+            <div class="card" *ngFor="let s of servicos" (click)="selecionar(s)">
+
+              <div class="card-header" [ngClass]="s.gradiente">
+                <h2>{{ s.nome }}</h2>
+                <p class="titulo">{{ s.titulo }}</p>
+                <p class="azul">{{ s.descricao}}</p>
+              </div>
+
+              <div class="card-body">
+                <p class="resumo">{{ s.resumo }}</p>
+
+                <div class="info-blocos">
+
+                  <div class="telefone"
+                    *ngIf="s.telefone !== 'Varia por região' && s.telefone !== 'Varia por instituição'">
+                    <ion-icon name="call"></ion-icon>
+                    <span>{{ s.telefone }}</span>
+                  </div>
+
+                  <div class="custo">
+                    <ion-icon class="verde" name="shield-checkmark" *ngIf="s.gratuito"></ion-icon>
+                    <ion-icon class="verde" name="cash" *ngIf="!s.gratuito"></ion-icon>
+                    <span>{{ s.gratuito ? '100% Gratuito' : 'Valores Sociais' }}</span>
+
+                  </div>
+
+                  <div class="disponibilidade">
+                    <ion-icon name="time"></ion-icon>
+                    <span>{{ s.disponibilidade }}</span>
+                  </div>
+                </div>
+
+                <button class="btn" [ngClass]="s.gradiente">
+                  Saiba mais
+
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção informativa -->
+          <div class="info-section">
+            <h2>Por que buscar ajuda?</h2>
+
+            <div class="info-grid">
+              <div>
+                <ion-icon name="heart"></ion-icon>
+                <h3>Cuidar da mente é essencial</h3>
+                <p>Assim como o corpo, a mente também precisa de atenção.</p>
+              </div>
+
+              <div>
+                <ion-icon name="people"></ion-icon>
+                <h3>Você não está sozinho</h3>
+                <p>Existem profissionais preparados para ajudar.</p>
+              </div>
+
+              <div>
+                <ion-icon name="shield-checkmark"></ion-icon>
+                <h3>Há tratamento acessível</h3>
+                <p>Serviços gratuitos e valores sociais disponíveis.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergência -->
+          <div class="emergencia">
+            <h3>Em situação de emergência?</h3>
+
+            <div class="emergencia-grid">
+              <div>
+                <p>CVV</p>
+                <strong>188</strong>
+              </div>
+
+              <div>
+                <p>SAMU</p>
+                <strong>192</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- DETALHES -->
+        <div *ngIf="mostrarDetalhes" class="detalhes">
+
+          <div class="detalhes-header" [ngClass]="servicoSelecionado.gradiente">
+
+            <button class="voltar" (click)="voltar()">
+              <ion-icon name="arrow-back"></ion-icon>
+              Voltar
+            </button>
+
+            <div class="detalhes-top">
+              <div>
+                <h2>{{ servicoSelecionado.nome }}</h2>
+                <p>{{ servicoSelecionado.titulo }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="detalhes-body">
+
+            <!-- O QUE É -->
+            <div>
+              <h3> O que é?</h3>
+              <p>{{ servicoSelecionado.oQueE }}</p>
+            </div>
+
+            <!-- PARA QUEM É -->
+            <div class="box01">
+              <div class="contentbox01">
+                <h3 id="titleinformativo01">Para quem é?</h3>
+
+                <p *ngFor="let item of servicoSelecionado.paraQuem">• {{ item }}</p>
+
+              </div>
+            </div>
+            <!-- COMO AJUDA -->
+            <div  class="box02">
+              <div class="contentbox02">
+                <h3 id="titleinformativo02">Como ajuda?</h3>
+
+                <p *ngFor="let item of servicoSelecionado.comoAjuda">• {{ item }}</p>
+
+              </div>
+            </div>
+            <!-- ONDE ENCONTRAR -->
+            <div  class="box03">
+              <div class="contentbox03">
+                <h3 id="titleinformativo03">Onde encontrar?</h3>
+
+                <p *ngFor="let item of servicoSelecionado.ondeEncontrar">• {{ item }}</p>
+
+              </div>
+            </div>
+            <!-- INFORMAÇÕES -->
+            <div class="info-dupla">
+              <div class="info-box">
+                <h4>Custo</h4>
+                <p>{{ servicoSelecionado.gratuito ? 'Gratuito' : 'Valores sociais' }}</p>
+              </div>
+
+              <div class="info-box">
+                <h4>Disponibilidade</h4>
+                <p>{{ servicoSelecionado.disponibilidade }}</p>
+              </div>
+            </div>
+
+            <div class="boxinformativoFinal">
+              <p>{{ servicoSelecionado.descricao }}</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="rodape">
+          <p>Sua saúde mental importa. Busque ajuda.</p>
+          <small>Informações gerais sobre serviços no Brasil</small>
+        </footer>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <style>
+    ion-toolbar {
+      --background: #1565c0;
+      --color: white;
+      border-bottom: solid 2px white;
+    }
+
+    ion-button {
+
+      --color: white;
+    }
+
+    ion-card {
+
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      box-shadow: none;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    ion-checkbox {
+      --size: 20px;
+      --checkbox-background-checked: rgb(0, 60, 255);
+    }
+
+    ion-checkbox::part(container) {
+      border-radius: 6px;
+      border: 2px solid #ffffff;
+    }
+
+    ion-icon {
+      font-size: 28px;
+      color: #1e88e5;
+    }
+  </style>
+</ion-content>

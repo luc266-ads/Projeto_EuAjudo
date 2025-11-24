@@ -56,10 +56,11 @@ export class Tab3Page {
     'Suporte emocional',
     'Educação',
     'Recursos digitais',
-    'Comunidade/Apoio mútuo'
+    'Comunidade/Apoio Social'
   ];
 
   publicos = [
+    'Idoso',
     'Adulto',
     'Jovem',
     'Adolescente',
@@ -181,7 +182,7 @@ export class Tab3Page {
       this.formData.objetivo
 
     ) {
-      this.submitted = true;
+      this.submitted = false;
       console.log('Dados enviados:', this.formData);
 
     }
