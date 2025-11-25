@@ -13,74 +13,184 @@
     </ion-toolbar>
   </ion-header>
 
- <div class="cardInicial">
-    <ion-card id="cardLogo">
-      <img id="logo" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-      <ion-card-header>
-        <ion-card-title id="logoTipo">Cadastro </ion-card-title>
-      </ion-card-header>
-    </ion-card>
-  </div>
-  <br>
-  <ion-card id="cardTitle">
-    <ion-card-header>
-      <ion-card-title id="title">Preenchar o campos abaixo: </ion-card-title>
-    </ion-card-header>
+ <div class="page-container">
+  <div class="box">
 
+    <!-- Painel Esquerdo -->
+    <div class="left-panel">
 
-    <div id="login">
-      <ion-card-content>
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
 
-        <div id="InputCor">
-          <ion-input label="Nome:" fill="outline" placeholder="Seu Nome" [(ngModel)]="nome"></ion-input>
-        </div>
+      <div class="logo-box">
+        <ion-icon name="business-outline"></ion-icon>
+      </div>
 
-        <div id="InputCor">
-          <ion-input label="Email:" fill="outline" type="password" placeholder="Ex: jo*****@gmail.com"
-            maxlength="15" [(ngModel)]="email" ></ion-input>
-        </div>
-        <div id="InputCor">
-          <ion-input label="CPF" fill="outline" placeholder="Ex: 000.000.000-00" maxlength="15" [(ngModel)]="cpf" ></ion-input>
-        </div>
-        <div id="InputCor">
-          <ion-input label="Senha:" fill="outline" type="password" placeholder="Digite sua Senha"
-            maxlength="15" [(ngModel)]="senha" ></ion-input>
-        </div>
-        <div id="InputCor">
-          <ion-input label="Confirma Senha:" fill="outline" type="password" placeholder="Confirma sua Senha"
-            maxlength="15" [(ngModel)]="confirmaSenha" ></ion-input>
+      <h1>Bem-vindo!</h1>
+      <p>Gerencie sua conta de forma simples e segura. Estamos aqui para ajudar você.</p>
+
+      <div class="icons-row">
+        <div class="icon-col">
+          <div class="icon-round">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+          </div>
+          <span>100% Seguro</span>
         </div>
 
-        <div class="checkbox">
-          <ion-checkbox></ion-checkbox>
-          
-            <p id = "checkboxContent"> Você aceitar que as perguntas do jogo seja de acordo com sua idade ?</p>
-          
+        <div class="icon-col">
+          <div class="icon-round">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <span>Fácil Acesso</span>
         </div>
-      </ion-card-content>
+      </div>
     </div>
-  </ion-card>
 
+    <!-- Painel Direito -->
+    <div class="right-panel">
 
-  <div class="botaoLogin">
-    <button id="botaoSaiba" > Voltar</button>
-    <button id="botaoSaiba" (click) = "enviar()"> Proximo</button>
+      <!-- Botões de Alternância -->
+      <div class="tabs">
+        <button 
+          [class.active]="modoAtual === 'login'" 
+          (click)="modoAtual = 'login'">
+          Login
+        </button>
+
+        <button 
+          [class.active]="modoAtual === 'cadastro'" 
+          (click)="modoAtual = 'cadastro'">
+          Cadastro
+        </button>
+      </div>
+
+      <!-- FORM LOGIN -->
+      <div *ngIf="modoAtual === 'login'" class="form-area">
+
+        <h2>Entrar na Conta</h2>
+        <p>Acesse sua conta para continuar</p>
+
+        <!-- Email -->
+        <label>Email</label>
+        <div class="input-box">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="email" [(ngModel)]="loginEmail"
+          placeholder="Ex: jo*****@gmail.com">
+        </div>
+
+        <!-- Senha -->
+        <label>Senha</label>
+        <div class="input-box">
+          <ion-icon name="lock-closed-outline"
+          ></ion-icon>
+
+          <input 
+            [type]="mostrarSenha ? 'text' : 'password'" 
+            [(ngModel)]="loginSenha"
+            placeholder="Digite sua senha">
+
+          <ion-icon 
+            class="toggle" 
+            [name]="mostrarSenha ? 'eye-off-outline' : 'eye-outline'"
+            (click)="mostrarSenha = !mostrarSenha">
+          </ion-icon>
+        </div>
+
+        <!-- Lembrar -->
+        <div class="extra-line">
+          <label><input type="checkbox"> Lembrar-me</label>
+          <a>Esqueci minha senha</a>
+        </div>
+
+        <button class="btn-main" (click)="handleLogin()">
+          Entrar
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </button>
+      </div>
+
+      <!-- FORM CADASTRO -->
+      <div *ngIf="modoAtual === 'cadastro'" class="form-area">
+
+        <h2>Criar Conta</h2>
+        <p>Preencha seus dados para começar</p>
+
+        <!-- Nome -->
+        <label>Nome Completo</label>
+        <div class="input-box">
+          <ion-icon name="person-outline"></ion-icon>
+          <input type="text" [(ngModel)]="nome"
+           placeholder="Digite seu nome">
+        </div>
+
+        <!-- Email -->
+        <label>Email</label>
+        <div class="input-box">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="email" [(ngModel)]="email"
+          placeholder="Ex: jo*****@gmail.com">
+        </div>
+
+        <!-- CPF -->
+        <label>CPF</label>
+        <div class="input-box">
+          <ion-icon name="id-card-outline"></ion-icon>
+          <input type="email" [(ngModel)]="cpf"
+          placeholder="000.000.000-00">
+        </div>
+
+        <!-- Senha -->
+        <label>Senha</label>
+        <div class="input-box">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input 
+            [type]="mostrarSenha ? 'text' : 'password'" 
+            [(ngModel)]="senha" placeholder="Digite sua senha">
+          <ion-icon 
+            class="toggle" 
+            [name]="mostrarSenha ? 'eye-off-outline' : 'eye-outline'"
+            (click)="mostrarSenha = !mostrarSenha">
+          </ion-icon>
+        </div>
+
+        <!-- Confirmar Senha -->
+        <label>Confirmar Senha</label>
+        <div class="input-box">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input 
+            [type]="mostrarConfirmarSenha ? 'text' : 'password'" 
+            [(ngModel)]="confirmaSenha" 
+            placeholder="Confirme sua senha">
+          <ion-icon 
+            class="toggle" 
+            [name]="mostrarConfirmarSenha ? 'eye-off-outline' : 'eye-outline'"
+            (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha">
+          </ion-icon>
+        </div>
+
+        <label class="termos">
+          <input type="checkbox"> Concordo com os termos e política de privacidade
+        </label>
+
+        <button class="btn-main" (click)="enviar()">
+          Criar Conta
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </button>
+
+      </div>
+
+      <!-- Divisor -->
+      <div class="divider">
+        <span>ou continue com</span>
+      </div>
+
+      <!-- Social -->
+      <div class="social-row">
+        <button class="social-btn">Google</button>
+        <button class="social-btn">Facebook</button>
+      </div>
+
+    </div>
   </div>
- 
-  
-  <style>
-    ion-checkbox {
-      --size: 25px;
-      --checkbox-background-checked: rgb(0, 60, 255);
-    }
-
-    ion-checkbox::part(container) {
-      border-radius: 6px;
-      border: 2px solid #ffffff;
-    }
-  </style>
-
-  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
-
+</div>
 
 </ion-content>

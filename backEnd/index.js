@@ -10,6 +10,7 @@ app.use(express.json()); // <-- ESSENCIAL para ler JSON no body
 // 🔹 Simulando um "banco de dados"
 let usuarios = [];
 let sugestoes = [];
+let questionario = [];
 
 // --- Usuários ---
 app.get("/api/usuarios", (req, res) => {
@@ -79,9 +80,54 @@ app.delete("/api/sugestoes/:id", (req, res) => {
   res.json({ message: "Sugestão deletada com sucesso!" });
 });
 
+
+// --- Questionario ---
+
+app.get("/api/questionario", (req, res) => {
+  res.json(questionario);
+});
+
+app.post("/api/questionario", (req, res) => {
+  const {
+    tipoLevel,        
+    tipoCor,
+    tipoMensagem,
+    tipoRecormendacao,
+
+  } = req.body;
+
+  if ( !tipoLevel || !tipoCor || !tipoMensagem || !tipoRecormendacao) {
+    return res.status(400).json({ error: "Preencha todos os campos!" });
+  }
+
+  const novoQuestionario = {
+    id: Date.now(),
+    tipoLevel,
+    tipoCor,
+    tipoMensagem,
+    tipoRecormendacao,
+
+  };
+
+  questionario.push(novoQuestionario);
+  res.json({ message: "Questionario cadastrada com sucesso!", questionario: novoQuestionario });
+});
+
+app.delete("/api/questionario/:id", (req, res) => {
+  const { id } = req.params;
+  const index = questionario.findIndex(s => s.id == id);
+  if (index === -1) return res.status(404).json({ error: "Questionario não encontrada!" });
+  questionario.splice(index, 1);
+  res.json({ message: "Questionario deletada com sucesso!" });
+});
+
+
+
+
 // 🔹 Servidor online
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/usuarios`);
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/sugestoes`);
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/questionario`);
 });

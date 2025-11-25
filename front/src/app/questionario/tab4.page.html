@@ -35,14 +35,14 @@
 
         <div class="analysis-card">
           <h3>Análise</h3>
-          <p>{{ calculateResult().message }}</p>
+          <p>{{ calculateResult().mensagem }}</p>
 
           <h3>Recomendação</h3>
-          <p>{{ calculateResult().recommendation }}</p>
+          <p>{{ calculateResult().recormendacao }}</p>
         </div>
         <div class="botaoResultado">
            <button class="btn-secondary" (click)="restart()">Nova Avaliação</button>
-          <button class="btn-primary">Proximo</button>
+          <button class="btn-primary" (click)="proximo()" >Proximo</button>
         </div>
       </div>
       <br>

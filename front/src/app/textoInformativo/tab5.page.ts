@@ -85,7 +85,7 @@ export class Tab5Page {
 
     {
       id: 'clinica',
-      nome: 'Clínica-Escola',
+      nome: 'Clínica Escola',
       titulo: 'Clínica-Escola de Psicologia',
       cor: 'blue',
       gradiente: 'gradiente-azul',

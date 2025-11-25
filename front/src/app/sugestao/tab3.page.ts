@@ -155,7 +155,7 @@ export class Tab3Page {
 
 
   ngOnInit() {
-    this.listarSugestões();
+    this.listarSugestoes();
 
   }
 
@@ -199,7 +199,7 @@ export class Tab3Page {
 
     this.Api.cadastrarSugestao(this.sugestoes).subscribe({
       next: () => {
-        this.listarSugestões();
+        this.listarSugestoes();
         this.sugestaoOk = true
         // Limpa o formulário
 
@@ -216,7 +216,7 @@ export class Tab3Page {
     });
   }
 
-  listarSugestões() {
+  listarSugestoes() {
     this.Api.listarSugestões().subscribe({
       next: (dados: any[]) => (this.guardaSugestao = dados),
       error: (err) => console.error(err),

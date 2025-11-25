@@ -8,7 +8,10 @@ import { Observable } from 'rxjs';
 export class Api {
   private apiUrl = 'http://localhost:3000/api/usuarios';
   private apiUrlSg = 'http://localhost:3000/api/sugestoes';
+  private apiUrlQt = 'http://localhost:3000/api/questionario';
   constructor(private http: HttpClient) { }
+
+  /////// USUARIO //////
 
   cadastrarUsuario(dados: any): Observable<any> {
     return this.http.post(this.apiUrl, dados);
@@ -30,5 +33,14 @@ export class Api {
     return this.http.get<any[]>(this.apiUrlSg);
   }
 
+   /////// QUESTIONARIO ///////
 
+     cadastrarQuestionario(dados: any): Observable<any> {
+    return this.http.post(this.apiUrlQt, dados);
+  }
+
+
+  listarQuestionario(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrlQt);
+  }
 }

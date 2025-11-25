@@ -432,9 +432,19 @@ font-weight: bold;
 }
 
 .detalhes-top {
+  color: #ffffff;
+  text-align: center;
   display: flex;
+  font-weight: bold;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
+background-color: #2f99f0b2;
+border-radius: 15px;
+}
+.titleDetalhesTop{
+font-size: 6pc;
+
+
 }
 
 .icone-grande {
@@ -443,6 +453,7 @@ font-weight: bold;
 
 .detalhes-body {
   padding: 25px;
+
 }
 
 .box {

@@ -17,7 +17,12 @@ export class Tab1Page {
   senha: string = '';
   confirmaSenha: string = '';
   cpf: string = '';
-
+  loginSenha: string = '';
+  loginEmail: string = '';
+  
+  modoAtual: 'login' | 'cadastro' = 'login';
+  mostrarSenha = false;
+  mostrarConfirmarSenha = false;
   
   constructor(private Api: Api) {}
 
@@ -39,7 +44,6 @@ export class Tab1Page {
 
     this.Api.cadastrarUsuario(this.usuario).subscribe({
       next: (res: any) => {
-        alert(res.message || 'Usuário cadastrado com sucesso!');
         this.listarUsuarios();
 
         // Limpa o formulário
@@ -61,5 +65,8 @@ export class Tab1Page {
       error: (err) => console.error(err),
     });
   }
+handleLogin(){
 
+
+}
 }

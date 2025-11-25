@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Api } from '../serviceApi/api';
 
 
 @Component({
@@ -9,16 +10,70 @@ import { Component } from '@angular/core';
 })
 export class Tab4Page {
 
-  
-  constructor() {}
-  
- getProgressPercent(): number {
-  const total = Object.values(this.answers).reduce((sum: number, val: number) => sum + val, 0);
-  return (total / 28) * 100;
-}
-currentQuestion = 0;
+
+  constructor(private Api: Api) { }
+
+  getProgressPercent(): number {
+    const total = Object.values(this.answers).reduce((sum: number, val: number) => sum + val, 0);
+    return (total / 28) * 100;
+  }
+  currentQuestion = 0;
   answers: { [key: number]: number } = {};
   showResult = false;
+  guardaQuestionario: any[] = [];
+
+  resultadoDp: {
+    tipoLevel: string;
+    tipoCor: string;
+    tipoMensagem: string;
+    tipoRecormendacao: string;
+
+
+  } = {
+      tipoLevel: '',
+      tipoCor: '',
+      tipoMensagem: '',
+      tipoRecormendacao: '',
+    };
+
+
+  formData = {
+    level: '',
+    color: '',
+    mensagem: '',
+    recormendacao: '',
+  };
+
+  level = [
+    'Baixo Risco',
+    'Risco Moderado',
+    'Risco Alto',
+    'Risco Muito Alto'
+
+  ]
+
+  mensagem = [
+    'Os comportamentos indicam uso equilibrado',
+    'Há sinais de uso excessivo que merecem atenção.',
+    'Os comportamentos sugerem dependência moderada.',
+    'Sinais de forte dependência virtual.'
+
+  ]
+
+  recormendacao = [
+    'Continue incentivando atividades offline.',
+    'Converse sobre limites e observe mudanças.',
+    'Recomenda-se buscar orientação profissional.',
+    'Procure ajuda psicológica urgentemente.'
+
+  ]
+  color = [
+    "green",
+    "blue",
+    "orange",
+    "red"
+
+  ]
 
   questions = [
     {
@@ -128,36 +183,82 @@ currentQuestion = 0;
     const percentage = (total / maxScore) * 100;
 
     if (percentage <= 25) {
-      return {
-        level: "Baixo Risco",
-        color: "green",
-        message: "Os comportamentos indicam uso equilibrado.",
-        recommendation: "Continue incentivando atividades offline."
+
+      this.formData = {
+        level: this.level[0],
+        color: this.color[0],
+        mensagem: this.mensagem[0],
+        recormendacao: this.recormendacao[0]
       };
+
+
     } else if (percentage <= 50) {
-      return {
-        level: "Risco Moderado",
-        color: "blue",
-        message: "Há sinais de uso excessivo que merecem atenção.",
-        recommendation: "Converse sobre limites e observe mudanças."
+
+      this.formData = {
+        level: this.level[1],
+        color: this.color[1],
+        mensagem: this.mensagem[1],
+        recormendacao: this.recormendacao[1]
       };
+
     } else if (percentage <= 75) {
-      return {
-        level: "Risco Alto",
-        color: "orange",
-        message: "Os comportamentos sugerem dependência moderada.",
-        recommendation: "Recomenda-se buscar orientação profissional."
+
+      this.formData = {
+        level: this.level[2],
+        color: this.color[2],
+        mensagem: this.mensagem[2],
+        recormendacao: this.recormendacao[2]
       };
+
     } else {
-      return {
-        level: "Risco Muito Alto",
-        color: "red",
-        message: "Sinais de forte dependência virtual.",
-        recommendation: "Procure ajuda psicológica urgentemente."
+
+      this.formData = {
+        level: this.level[3],
+        color: this.color[3],
+        mensagem: this.mensagem[3],
+        recormendacao: this.recormendacao[3]
       };
+
     }
+    return (this.formData)
   }
 
- 
+  ngOnInit() {
+    this.listarQuestionario();
 
+  }
+  proximo() {
+    // Monta o objeto ANTES da requisição
+    this.resultadoDp = {
+      tipoLevel: this.formData.level,
+      tipoCor: this.formData.color,
+      tipoMensagem: this.formData.mensagem,
+      tipoRecormendacao: this.formData.recormendacao
+
+
+    };
+
+    this.Api.cadastrarQuestionario(this.resultadoDp).subscribe({
+      next: () => {
+        this.listarQuestionario();
+        // Limpa o formulário
+
+        this.resultadoDp.tipoLevel = ""
+        this.resultadoDp.tipoCor = ""
+        this.resultadoDp.tipoMensagem = ""
+        this.resultadoDp.tipoRecormendacao = ""
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+  }
+
+  listarQuestionario() {
+    this.Api.listarQuestionario().subscribe({
+      next: (dados: any[]) => (this.guardaQuestionario = dados),
+      error: (err) => console.error(err),
+    });
+  }
 }
