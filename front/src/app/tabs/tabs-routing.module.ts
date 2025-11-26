@@ -18,7 +18,7 @@ const routes: Routes = [
      
       {
         path: 'tab3',
-        loadChildren: () => import('../sugestao/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () => import('../calendario/tab3.module').then(m => m.Tab3PageModule)
       },
       {
         path: 'tab4',
@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'tab5',
         loadChildren: () => import('../textoInformativo/tab5.module').then(m => m.Tab5PageModule)
+      },
+      {
+        path: 'tab6',
+        loadChildren: () => import('../sugestao/tab6.module').then(m => m.Tab6PageModule)
       },
       {
         path: '',

@@ -1,0 +1,238 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="sugestaoOk" id="sugestaoOk">
+    <div id="sugestaoContet">
+      <h3>Sugestão Enviada com <span class="azul">SUCESSO!!</span></h3>
+      <p class="msg">
+        Obrigado por contribuir para melhorar nosso projeto. Sua opinião é muito importante!
+      </p>
+      <button class="btn-primary" (click)="voltarSugestaoOk()">
+        Voltar
+      </button>
+    </div>
+
+  </div>
+
+  <div class="buscarCidade" *ngIf="buscarCidade">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" [(ngModel)]="nome"></ion-searchbar>
+
+
+  </div>
+
+
+
+  <!-- Formulário -->
+  <div *ngIf="submitted" class="container">
+
+    <div class="header">
+      <h1>Deixe a Sua Sugestão de Melhoria</h1>
+    </div>
+
+    <div class="card">
+
+      <!-- Sugestão -->
+      <div class="field">
+        <label>Escreva sua Sugestão</label>
+
+        <textarea [(ngModel)]="formData.sugestao" placeholder="Digite aqui sua sugestão..."></textarea>
+      </div>
+
+      <!-- Categoria -->
+      <div class="field">
+        <label>Em qual categoria essa sugestão se encaixa melhor?</label>
+
+        <div class="grid">
+          <button *ngFor="let cat of categorias" (click)="formData.categoria = cat"
+            [class.selected]="formData.categoria === cat">
+            <span class="radio">
+              <span *ngIf="formData.categoria === cat" class="radio-dot"></span>
+            </span>
+
+            {{ cat }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Público -->
+      <div class="field">
+        <label>Essa sugestão é voltada para qual público?</label>
+
+        <div class="grid">
+          <button *ngFor="let pub of publicos" (click)="formData.publico = pub"
+            [class.selected]="formData.publico === pub">
+            <span class="radio">
+              <span *ngIf="formData.publico === pub" class="radio-dot"></span>
+            </span>
+
+            {{ pub }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Proximidade -->
+      <div class="field">
+        <label>Que tipo de proximidade se tem com esta vítima?</label>
+
+        <div class="grid">
+          <button *ngFor="let prox of proximidades" (click)="formData.proximidade = prox"
+            [class.selected]="formData.proximidade === prox">
+            <span class="radio">
+              <span *ngIf="formData.proximidade === prox" class="radio-dot"></span>
+            </span>
+
+            {{ prox }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Objetivo -->
+      <div class="field">
+        <label>Qual é o objetivo principal dessa sugestão?</label>
+
+        <div class="grid">
+          <button *ngFor="let obj of objetivos" (click)="formData.objetivo = obj"
+            [class.selected]="formData.objetivo === obj">
+            <span class="radio">
+              <span *ngIf="formData.objetivo === obj" class="radio-dot"></span>
+            </span>
+
+            {{ obj }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="actions">
+        <button class="btn-secondary" (click)="handleReset()">Voltar</button>
+
+        <button class="btn-primary" (click)="handleSubmit()">Enviar Ideia</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="bodyCalendario" class="bodyCalendario">
+    <!-- Banner -->
+    <div class="banner">
+      <div class="banner-shape">
+        <div class="mountain-left"></div>
+        <div class="mountain-right"></div>
+        <div class="moon"></div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="card">
+
+        <div class="title-area">
+          <h2>🗓 Previsão de Datas do Evento</h2>
+        </div>
+
+        <!-- Calendário -->
+        <div class="calendar">
+
+          <!-- Header -->
+          <div class="calendar-header">
+            <button (click)="mesAnterior()">⬅</button>
+
+            <h3>{{ meses[currentMonth] }}</h3>
+
+            <button (click)="proximoMes()">➡</button>
+          </div>
+
+          <!-- Dias Semana -->
+          <div class="dias-semana">
+            <div *ngFor="let d of diasSemana">{{ d }}</div>
+          </div>
+
+          <!-- Dias -->
+          <div class="dias-grid">
+            <button *ngFor="let dia of gerarCalendario()" [disabled]="!dia" (click)="toggleData(dia)"
+              [class.selected]="selectedDates.includes(dia + '/' + (currentMonth+1) + '/2025')" [class.empty]="!dia">
+              {{ dia }}
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Datas Selecionadas -->
+        <div *ngIf="selectedDates.length > 0" class="datas-container">
+          <p>Datas Selecionadas:</p>
+
+          <div class="datas-list">
+            <span *ngFor="let d of selectedDates">{{ d }}</span>
+          </div>
+        </div>
+
+        <!-- Botão Sugestão -->
+        <button class="btn-sugestao" (click)="MeusEncontrosJaneiro()">
+          💡Clique aqui Para Avançar
+        </button>
+
+      </div>
+    </div>
+  </div>
+ 
+   <!-- FOOTER NAVEGAÇÃO-->
+  <footer class="footer">
+    <!-- MENU -->
+    <div class="footer-content">
+
+    
+      <!-- NAVEGAÇÃO -->
+      <nav class="menu">
+        <button 
+        *ngFor="let item of menuItems"
+          (click)="handleMenuClick(item.id)"
+          [ngClass]="{
+            'ativo': menuAtivo === item.id && item.id !== 'sair',
+            'sair': item.id === 'sair'
+          }"
+        >
+          <ion-icon [name]="item.icone"></ion-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </nav>
+
+      <div class="espaco"></div>
+    </div>
+
+    <div class="barra"></div>
+  </footer>
+
+  <style>
+    ion-toolbar {
+      --background: #1565c0;
+      --color: white;
+      border-bottom: solid 2px white;
+    }
+
+    ion-button {
+
+      --color: white;
+    }
+
+    ion-card {
+
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      box-shadow: none;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    ion-checkbox {
+      --size: 20px;
+      --checkbox-background-checked: rgb(0, 60, 255);
+    }
+
+    ion-checkbox::part(container) {
+      border-radius: 6px;
+      border: 2px solid #ffffff;
+    }
+  </style>
+</ion-content>

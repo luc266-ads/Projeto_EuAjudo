@@ -1,117 +1,7 @@
 
 
 
-hr{
-background-color: white;
-height: 5px;
 
-}
-:host {
-    display: block;
-    padding: 16px;
-}
-
-
-.panel {
-    position: fixed;
-    height: 50%;
-    width: 50%;
-    padding: 16px;
-    background: linear-gradient(to top, #2196f3, #1565c0);
-    border-bottom-right-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-
-}
-
-/*KEYFRAMES*/
-@keyframes slideInLeft {
-    0% {
-        transform: translateX(-110%);
-        opacity: 0;
-    }
-
-    75% {
-        transform: translateX(10%);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-
-/* APLICAÇÃO DAS ANIMAÇÕES*/
-.slide-in-left {
-    animation: slideInLeft 0.6s cubic-bezier(.25, .8, .25, 1) forwards;
-
-}
-
-
-
-/* Posições */
-.left-panel {
-    left: 16px;
-}
-
-
-.toolbar {
-    display: flex;
-
-
-}
-
-#titleToolbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-
-
-}
-
-
-@keyframes slideInTop {
-    0% {
-        transform: translateY(-110%);
-        opacity: 0;
-    }
-
-    75% {
-        transform: translateY(10%);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-}
-
-/* ——— APLICAÇÃO DAS ANIMAÇÕES ——— */
-.slide-in-top {
-    animation: slideInTop 0.6s cubic-bezier(.25, .8, .25, 1) forwards;
-
-}
-
-.top-panel {
-    top: 16px;
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 
 /////////// Texte Informativo //////
@@ -197,6 +87,7 @@ font-weight: bold;
 .tela {
   min-height: 100vh;
   background: linear-gradient(135deg, #2275d3, #1565c0, #1e88e5);
+  animation: aparecer 0.9s ease-in-out;
   padding: 20px;
   font-family: "Inter", sans-serif;
   display: flex;
@@ -596,3 +487,25 @@ color: green;
   background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
 }
 
+.btn-sugestao {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(to right, #ffffff, #b4b4b4);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+}
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

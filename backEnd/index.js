@@ -1,133 +1,158 @@
 const express = require('express');
 const cors = require('cors');
+const pool = require('./db'); // <-- conexão com NEON
 
 const app = express();
 
-// ✅ Middlewares
 app.use(cors());
-app.use(express.json()); // <-- ESSENCIAL para ler JSON no body
+app.use(express.json());
 
-// 🔹 Simulando um "banco de dados"
-let usuarios = [];
-let sugestoes = [];
-let questionario = [];
+// -----------------------------
+// USUÁRIOS
+// -----------------------------
 
-// --- Usuários ---
-app.get("/api/usuarios", (req, res) => {
-  res.json(usuarios);
+// GET - listar usuários
+app.get("/api/usuarios", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM usuarios ORDER BY id DESC");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao buscar usuários." });
+  }
 });
 
-app.post("/api/usuarios", (req, res) => {
+// POST - criar usuário
+app.post("/api/usuarios", async (req, res) => {
   const { nome, email, senha, cpf } = req.body;
 
   if (!nome || !email || !senha || !cpf) {
     return res.status(400).json({ error: "Preencha todos os campos!" });
   }
 
-  const novoUsuario = { id: Date.now(), nome, email, senha, cpf };
-  usuarios.push(novoUsuario);
-
-  res.json({ message: "Usuário cadastrado com sucesso!", usuarios: novoUsuario });
+  try {
+    const result = await pool.query(
+      `INSERT INTO usuarios (nome, email, senha, cpf)
+       VALUES ($1, $2, $3, $4) RETURNING *`,
+      [nome, email, senha, cpf]
+    );
+    res.json({ message: "Usuário cadastrado!", usuario: result.rows[0] });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Erro ao cadastrar usuário." });
+  }
 });
 
-app.delete("/api/usuarios/:id", (req, res) => {
-  const { id } = req.params;
-  const index = usuarios.findIndex(u => u.id == id);
-  if (index === -1) return res.status(404).json({ error: "Usuário não encontrado!" });
-  usuarios.splice(index, 1);
-  res.json({ message: "Usuário deletado com sucesso!" });
+// DELETE - excluir usuário
+app.delete("/api/usuarios/:id", async (req, res) => {
+  try {
+    const result = await pool.query("DELETE FROM usuarios WHERE id = $1", [
+      req.params.id,
+    ]);
+    res.json({ message: "Usuário deletado!" });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao deletar usuário." });
+  }
 });
 
+// -----------------------------
+// SUGESTÕES
+// -----------------------------
 
-// --- Sugestões ---
-app.get("/api/sugestoes", (req, res) => {
-  res.json(sugestoes);
+app.get("/api/sugestoes", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM sugestoes ORDER BY id DESC");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao buscar sugestões." });
+  }
 });
 
-app.post("/api/sugestoes", (req, res) => {
+app.post("/api/sugestoes", async (req, res) => {
   const {
     sugestao,
-    tipoSugestao,        
+    tipoSugestao,
     tipoPublico,
     tipoParentesco,
     objetivoSugestao,
-
   } = req.body;
 
   if (!sugestao || !tipoPublico || !tipoParentesco || !objetivoSugestao || !tipoSugestao) {
     return res.status(400).json({ error: "Preencha todos os campos!" });
   }
 
-  const novaSugestao = {
-    id: Date.now(),
-    sugestao,
-    tipoSugestao,
-    tipoPublico,
-    tipoParentesco,
-    objetivoSugestao,
-
-  };
-
-  sugestoes.push(novaSugestao);
-  res.json({ message: "Sugestão cadastrada com sucesso!", sugestoes: novaSugestao });
+  try {
+    const result = await pool.query(
+      `INSERT INTO sugestoes 
+      (sugestao, tipoSugestao, tipoPublico, tipoParentesco, objetivoSugestao)
+      VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+      [sugestao, tipoSugestao, tipoPublico, tipoParentesco, objetivoSugestao]
+    );
+    res.json({ message: "Sugestão cadastrada!", sugestao: result.rows[0] });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao cadastrar sugestão." });
+  }
 });
 
-app.delete("/api/sugestoes/:id", (req, res) => {
-  const { id } = req.params;
-  const index = sugestoes.findIndex(s => s.id == id);
-  if (index === -1) return res.status(404).json({ error: "Sugestão não encontrada!" });
-  sugestoes.splice(index, 1);
-  res.json({ message: "Sugestão deletada com sucesso!" });
+app.delete("/api/sugestoes/:id", async (req, res) => {
+  try {
+    await pool.query("DELETE FROM sugestoes WHERE id = $1", [req.params.id]);
+    res.json({ message: "Sugestão deletada!" });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao deletar sugestão." });
+  }
 });
 
+// -----------------------------
+// QUESTIONARIO
+// -----------------------------
 
-// --- Questionario ---
-
-app.get("/api/questionario", (req, res) => {
-  res.json(questionario);
+app.get("/api/questionario", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM questionario ORDER BY id DESC");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao buscar questionarios." });
+  }
 });
 
-app.post("/api/questionario", (req, res) => {
-  const {
-    tipoLevel,        
-    tipoCor,
-    tipoMensagem,
-    tipoRecormendacao,
+app.post("/api/questionario", async (req, res) => {
+  const { tipoLevel, tipoCor, tipoMensagem, tipoRecormendacao } = req.body;
 
-  } = req.body;
-
-  if ( !tipoLevel || !tipoCor || !tipoMensagem || !tipoRecormendacao) {
+  if (!tipoLevel || !tipoCor || !tipoMensagem || !tipoRecormendacao) {
     return res.status(400).json({ error: "Preencha todos os campos!" });
   }
 
-  const novoQuestionario = {
-    id: Date.now(),
-    tipoLevel,
-    tipoCor,
-    tipoMensagem,
-    tipoRecormendacao,
-
-  };
-
-  questionario.push(novoQuestionario);
-  res.json({ message: "Questionario cadastrada com sucesso!", questionario: novoQuestionario });
+  try {
+    const result = await pool.query(
+      `INSERT INTO questionario (tipoLevel, tipoCor, tipoMensagem, tipoRecormendacao)
+       VALUES ($1,$2,$3,$4) RETURNING *`,
+      [tipoLevel, tipoCor, tipoMensagem, tipoRecormendacao]
+    );
+    res.json({ message: "Questionário cadastrado!", questionario: result.rows[0] });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao cadastrar questionário." });
+  }
 });
 
-app.delete("/api/questionario/:id", (req, res) => {
-  const { id } = req.params;
-  const index = questionario.findIndex(s => s.id == id);
-  if (index === -1) return res.status(404).json({ error: "Questionario não encontrada!" });
-  questionario.splice(index, 1);
-  res.json({ message: "Questionario deletada com sucesso!" });
+app.delete("/api/questionario/:id", async (req, res) => {
+  try {
+    await pool.query("DELETE FROM questionario WHERE id = $1", [
+      req.params.id,
+    ]);
+    res.json({ message: "Questionário deletado!" });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao deletar questionário." });
+  }
 });
 
+// -----------------------------
+// SERVIDOR
+// -----------------------------
 
-
-
-// 🔹 Servidor online
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/usuarios`);
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/sugestoes`);
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/questionario`);
+
 });

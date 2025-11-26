@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Api } from '../serviceApi/api';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Api } from '../serviceApi/api';
 export class Tab4Page {
 
 
-  constructor(private Api: Api) { }
+  constructor(private Api: Api, private router: Router) { }
 
   getProgressPercent(): number {
     const total = Object.values(this.answers).reduce((sum: number, val: number) => sum + val, 0);
@@ -21,6 +22,11 @@ export class Tab4Page {
   answers: { [key: number]: number } = {};
   showResult = false;
   guardaQuestionario: any[] = [];
+
+   menuAtivo: string = '';
+  mostrarPerfil: boolean = false;
+
+
 
   resultadoDp: {
     tipoLevel: string;
@@ -43,7 +49,12 @@ export class Tab4Page {
     mensagem: '',
     recormendacao: '',
   };
-
+    menuItems = [
+    { id: 'inicio', label: 'Início', icone: 'home-outline' },
+    { id: 'calendario', label: 'Calendário', icone: 'calendar-outline' },
+    { id: 'quemsomos', label: 'Quem Somos', icone: 'people-outline' },
+    { id: 'sair', label: 'Sair', icone: 'log-out-outline'  }
+  ];
   level = [
     'Baixo Risco',
     'Risco Moderado',
@@ -241,6 +252,7 @@ export class Tab4Page {
     this.Api.cadastrarQuestionario(this.resultadoDp).subscribe({
       next: () => {
         this.listarQuestionario();
+        this.router.navigate(['/tabs/tab6']);
         // Limpa o formulário
 
         this.resultadoDp.tipoLevel = ""
@@ -260,5 +272,31 @@ export class Tab4Page {
       next: (dados: any[]) => (this.guardaQuestionario = dados),
       error: (err) => console.error(err),
     });
+  }
+   handleMenuClick(id: string) {
+    if (id === 'sair') {
+
+      this.router.navigate(['/tabs/tab1']);
+
+      return;
+    } if (id === 'inicio') {
+
+      this.router.navigate(['/tabs/tab5']);
+
+      return;
+    } if (id === 'calendario') {
+
+      this.router.navigate(['/tabs/tab3']);
+
+      return;
+    } if (id === 'quemsomos') {
+
+      this.router.navigate(['/tabs/tab2']);
+
+
+      return;
+    }
+    this.menuAtivo = id;
+    console.log("Navegando para:", id);
   }
 }

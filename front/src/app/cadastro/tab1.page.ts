@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Api } from '../serviceApi/api';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +11,7 @@ import { Api } from '../serviceApi/api';
 })
 export class Tab1Page {
 
- usuario: { nome: string; email: string; senha: string ; cpf: string} = { nome: '', email: '', senha: '', cpf: '' };
+  usuario: { nome: string; email: string; senha: string; cpf: string } = { nome: '', email: '', senha: '', cpf: '' };
 
   usuarios: any[] = [];
   nome: string = '';
@@ -19,12 +21,12 @@ export class Tab1Page {
   cpf: string = '';
   loginSenha: string = '';
   loginEmail: string = '';
-  
+
   modoAtual: 'login' | 'cadastro' = 'login';
   mostrarSenha = false;
   mostrarConfirmarSenha = false;
-  
-  constructor(private Api: Api) {}
+
+  constructor(private Api: Api, private router: Router) { }
 
 
 
@@ -45,6 +47,7 @@ export class Tab1Page {
     this.Api.cadastrarUsuario(this.usuario).subscribe({
       next: (res: any) => {
         this.listarUsuarios();
+        this.router.navigate(['/tabs/tab5']);
 
         // Limpa o formulário
         this.nome = '';
@@ -65,8 +68,10 @@ export class Tab1Page {
       error: (err) => console.error(err),
     });
   }
-handleLogin(){
+  handleLogin() {
+    this.router.navigate(['/tabs/tab5']);
 
 
-}
+
+  }
 }

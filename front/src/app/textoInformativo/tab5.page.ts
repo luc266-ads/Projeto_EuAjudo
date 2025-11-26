@@ -19,6 +19,12 @@ export class Tab5Page {
   servicoSelecionado: any = null;
   mostrarDetalhes = false;
 
+
+
+  Avancar() {
+  this.router.navigate(['/tabs/tab4']);
+  
+  }
   EncontroLeft() {
     this.menuEncontro = !this.menuEncontro;
 
@@ -35,22 +41,22 @@ export class Tab5Page {
 
   handleMenuClick(id: string) {
     if (id === 'sair') {
-   
+
       this.router.navigate(['/tabs/tab1']);
 
       return;
     } if (id === 'inicio') {
-    
+
       this.router.navigate(['/tabs/tab5']);
 
       return;
     } if (id === 'calendario') {
-    
+
       this.router.navigate(['/tabs/tab3']);
 
       return;
     } if (id === 'quemsomos') {
-     
+
       this.router.navigate(['/tabs/tab2']);
 
 

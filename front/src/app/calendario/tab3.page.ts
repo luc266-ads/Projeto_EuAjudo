@@ -16,7 +16,7 @@ export class Tab3Page {
   constructor(private CidadesPE: CidadesPE,
     private Api: Api, private router: Router
   ) { }
-  
+
   menuAtivo: string = 'calendario';
   mostrarPerfil: boolean = false;
 
@@ -35,12 +35,12 @@ export class Tab3Page {
 
 
   ///////// FOOTER NAVEGAÇÃO ///////////
-  
+
   menuItems = [
     { id: 'inicio', label: 'Início', icone: 'home-outline' },
     { id: 'calendario', label: 'Calendário', icone: 'calendar-outline' },
     { id: 'quemsomos', label: 'Quem Somos', icone: 'people-outline' },
-    { id: 'sair', label: 'Sair', icone: 'log-out-outline'  }
+    { id: 'sair', label: 'Sair', icone: 'log-out-outline' }
   ];
 
   ////// ESTRUTURA API //////
@@ -140,25 +140,24 @@ export class Tab3Page {
   outroTipoV: boolean = false;
 
 
-   
-     handleMenuClick(id: string) {
+  handleMenuClick(id: string) {
     if (id === 'sair') {
-   
+
       this.router.navigate(['/tabs/tab1']);
 
       return;
     } if (id === 'inicio') {
-    
+
       this.router.navigate(['/tabs/tab5']);
 
       return;
     } if (id === 'calendario') {
-    
+
       this.router.navigate(['/tabs/tab3']);
 
       return;
     } if (id === 'quemsomos') {
-     
+
       this.router.navigate(['/tabs/tab2']);
 
 
@@ -168,7 +167,7 @@ export class Tab3Page {
     console.log("Navegando para:", id);
   }
 
-  
+
 
   ngOnInit() {
     this.listarSugestoes();
@@ -233,7 +232,7 @@ export class Tab3Page {
   }
 
   listarSugestoes() {
-    this.Api.listarSugestões().subscribe({
+    this.Api.listarSugestoes().subscribe({
       next: (dados: any[]) => (this.guardaSugestao = dados),
       error: (err) => console.error(err),
     });
