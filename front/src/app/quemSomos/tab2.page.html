@@ -1,0 +1,172 @@
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+   <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="tag">
+        <ion-icon name="book-outline"></ion-icon>
+        <span>Projeto Acadêmico</span>
+      </div>
+
+      <h1>Quem Somos</h1>
+      <p>
+        Um projeto dedicado à prevenção e conscientização sobre dependência virtual
+      </p>
+    </div>
+  </section>
+
+  <!-- MISSÃO -->
+  <section class="container">
+    <div class="box">
+      <div class="title-row">
+        <div class="icon-square">
+          <ion-icon name="disc-outline"></ion-icon>
+        </div>
+        <h2>Nossa Missão</h2>
+      </div>
+
+      <div class="text">
+        <p>
+          Somos uma equipe de estudantes universitários comprometidos em desenvolver soluções tecnológicas 
+          que promovam a <b>qualidade de vida</b> e o <b>bem-estar digital</b>.
+        </p>
+
+        <p>
+          Nosso projeto nasceu da observação crescente de casos de dependência virtual entre familiares e amigos.
+        </p>
+
+        <p>
+          Com <b>questionários especializados</b>, ajudamos a identificar sinais de dependência digital.
+        </p>
+
+        <p>
+          Acreditamos que a tecnologia pode ser uma ferramenta poderosa para combater seus próprios excessos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+  <section class="container">
+    <div class="center">
+      <h2>Nossos Valores</h2>
+      <p>Princípios que guiam nosso compromisso com a comunidade</p>
+    </div>
+
+    <div class="grid-values">
+      <div class="value-card" *ngFor="let valor of valores">
+        <div class="value-icon">
+          <ion-icon [name]="valor.icone"></ion-icon>
+        </div>
+        <h3>{{ valor.titulo }}</h3>
+        <p>{{ valor.descricao }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="container">
+    <div class="center">
+      <h2>Nossa Equipe</h2>
+      <p>Conheça os estudantes responsáveis por este projeto</p>
+    </div>
+
+    <div class="grid-team">
+      <div class="team-card" *ngFor="let item of integrantes">
+        
+        <div class="team-photo">
+          <ng-container *ngIf="item.foto; else letra">
+            <img [src]="item.foto" />
+          </ng-container>
+
+          <ng-template #letra>
+            <div class="photo-placeholder">
+              {{ item.nome.charAt(0) }}
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="team-content">
+          <h3>{{ item.nome }}</h3>
+          <p class="papel">{{ item.papel }}</p>
+          <p class="curso">{{ item.curso }}</p>
+
+          <p class="descricao">{{ item.descricao }}</p>
+
+          <!-- Redes -->
+          <div class="socials">
+            <a [href]="item.linkedin" target="_blank">
+              <ion-icon name="logo-linkedin"></ion-icon>
+              <span>LinkedIn</span>
+            </a>
+            <a [href]="item.github" target="_blank">
+              <ion-icon name="logo-github"></ion-icon>
+              <span>GitHub</span>
+            </a>
+          </div>
+
+          <a [href]="'mailto:' + item.email" class="email-btn">
+            <ion-icon name="mail-outline"></ion-icon>
+            Enviar Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Faça Parte Desta Mudança</h2>
+    <p>
+      Ajude-nos a apoiar pessoas que possam estar sofrendo com dependência virtual.
+    </p>
+
+    <div class="cta-buttons">
+      <ion-button expand="block" shape="round" color="light">Realizar Avaliação</ion-button>
+      <ion-button expand="block" shape="round" fill="outline" color="light">Saiba Mais</ion-button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Projeto Acadêmico desenvolvido com dedicação e compromisso social</p>
+    <span>© 2025 - Todos os direitos reservados</span>
+  </footer>
+  
+  <!-- FOOTER NAVEGAÇÃO-->
+  <footer class="footer">
+    <!-- MENU -->
+    <div class="footer-content">
+
+    
+      <!-- NAVEGAÇÃO -->
+      <nav class="menu">
+        <button 
+          *ngFor="let item of menuItems"
+          (click)="handleMenuClick(item.id)"
+          [ngClass]="{
+            'ativo': menuAtivo === item.id && item.id !== 'sair',
+            'sair': item.id === 'sair'
+          }"
+        >
+          <ion-icon [name]="item.icone"></ion-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </nav>
+
+      <div class="espaco"></div>
+    </div>
+
+    <div class="barra"></div>
+  </footer>
+
+</ion-content>

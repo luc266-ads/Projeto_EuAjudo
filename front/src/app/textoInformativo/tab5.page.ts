@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { __values } from 'tslib';
 
 @Component({
@@ -9,7 +10,10 @@ import { __values } from 'tslib';
 })
 export class Tab5Page {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  menuAtivo: string = 'inicio';
+  mostrarPerfil: boolean = false;
 
   menuEncontro: boolean = false;
   servicoSelecionado: any = null;
@@ -20,6 +24,41 @@ export class Tab5Page {
 
   }
 
+
+  menuItems = [
+    { id: 'inicio', label: 'Início', icone: 'home-outline' },
+    { id: 'calendario', label: 'Calendário', icone: 'calendar-outline' },
+    { id: 'quemsomos', label: 'Quem Somos', icone: 'people-outline' },
+    { id: 'sair', label: 'Sair', icone: 'log-out-outline' }
+  ];
+
+
+  handleMenuClick(id: string) {
+    if (id === 'sair') {
+   
+      this.router.navigate(['/tabs/tab1']);
+
+      return;
+    } if (id === 'inicio') {
+    
+      this.router.navigate(['/tabs/tab5']);
+
+      return;
+    } if (id === 'calendario') {
+    
+      this.router.navigate(['/tabs/tab3']);
+
+      return;
+    } if (id === 'quemsomos') {
+     
+      this.router.navigate(['/tabs/tab2']);
+
+
+      return;
+    }
+    this.menuAtivo = id;
+    console.log("Navegando para:", id);
+  }
 
   servicos = [
     {

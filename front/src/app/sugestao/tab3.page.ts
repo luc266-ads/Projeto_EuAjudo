@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CidadesPE } from '../serviceMP/cidades-pe';
 import { Api } from '../serviceApi/api';
 import { __values } from 'tslib';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,8 +14,12 @@ import { __values } from 'tslib';
 export class Tab3Page {
 
   constructor(private CidadesPE: CidadesPE,
-    private Api: Api
+    private Api: Api, private router: Router
   ) { }
+  
+  menuAtivo: string = 'calendario';
+  mostrarPerfil: boolean = false;
+
 
   //// VAR TIMER INPUT_OUTROS01 ////
   tempoInicial: number = 1;
@@ -25,6 +30,18 @@ export class Tab3Page {
   tempoInicial02: number = 1;
   tempoRestante02: number = this.tempoInicial02;
   intervalo02: any;
+
+
+
+
+  ///////// FOOTER NAVEGAÇÃO ///////////
+  
+  menuItems = [
+    { id: 'inicio', label: 'Início', icone: 'home-outline' },
+    { id: 'calendario', label: 'Calendário', icone: 'calendar-outline' },
+    { id: 'quemsomos', label: 'Quem Somos', icone: 'people-outline' },
+    { id: 'sair', label: 'Sair', icone: 'log-out-outline'  }
+  ];
 
   ////// ESTRUTURA API //////
   sugestoes: {
@@ -110,10 +127,6 @@ export class Tab3Page {
   outroOB: boolean = false;
   outro: boolean = false;
 
-
-
-
-
   ///// CADS /////
 
   buscarCidade: boolean = false;
@@ -127,32 +140,35 @@ export class Tab3Page {
   outroTipoV: boolean = false;
 
 
-  get bodyCalendarioStyle() {
-    if (this.menuEncontro === false) {
-      return { 'background': 'linear-gradient( to top #1565c0, #2196f3)' };
-    } else if (this.menuEncontro === true) {
-      return {
-        'opacity': '0.5',
-        'transition': 'opacity 0.8s ease',
-        'filter': 'blur(10px)'
-      };
-    }
-    return
-  }
-  get bodySugestaoStyle() {
-    if (this.menuEncontro === false) {
-      return { 'background': 'linear-gradient( to top #1565c0, #2196f3)' };
-    } else if (this.menuEncontro === true) {
-      return {
-        'opacity': '0.5',
-        'transition': 'opacity 0.8s ease',
-        'filter': 'blur(10px)'
-      };
-    }
+   
+     handleMenuClick(id: string) {
+    if (id === 'sair') {
+   
+      this.router.navigate(['/tabs/tab1']);
 
-    return
+      return;
+    } if (id === 'inicio') {
+    
+      this.router.navigate(['/tabs/tab5']);
+
+      return;
+    } if (id === 'calendario') {
+    
+      this.router.navigate(['/tabs/tab3']);
+
+      return;
+    } if (id === 'quemsomos') {
+     
+      this.router.navigate(['/tabs/tab2']);
+
+
+      return;
+    }
+    this.menuAtivo = id;
+    console.log("Navegando para:", id);
   }
 
+  
 
   ngOnInit() {
     this.listarSugestoes();
@@ -243,7 +259,7 @@ export class Tab3Page {
 
   }
   mundarCidade() {
-    
+
     this.buscarCidade = false
 
 
@@ -331,5 +347,5 @@ export class Tab3Page {
 
 
 
-  
+
 }
