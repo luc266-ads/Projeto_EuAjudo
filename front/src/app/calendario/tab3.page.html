@@ -6,124 +6,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <div *ngIf="sugestaoOk" id="sugestaoOk">
-    <div id="sugestaoContet">
-      <h3>Sugestão Enviada com <span class="azul">SUCESSO!!</span></h3>
-      <p class="msg">
-        Obrigado por contribuir para melhorar nosso projeto. Sua opinião é muito importante!
-      </p>
-      <button class="btn-primary" (click)="voltarSugestaoOk()">
-        Voltar
-      </button>
-    </div>
-
-  </div>
-
-  <div class="buscarCidade" *ngIf="buscarCidade">
-    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" [(ngModel)]="nome"></ion-searchbar>
-
-
-  </div>
-
-
-
-  <!-- Formulário -->
-  <div *ngIf="submitted" class="container">
-
-    <div class="header">
-      <h1>Deixe a Sua Sugestão de Melhoria</h1>
-    </div>
-
-    <div class="card">
-
-      <!-- Sugestão -->
-      <div class="field">
-        <label>Escreva sua Sugestão</label>
-
-        <textarea [(ngModel)]="formData.sugestao" placeholder="Digite aqui sua sugestão..."></textarea>
-      </div>
-
-      <!-- Categoria -->
-      <div class="field">
-        <label>Em qual categoria essa sugestão se encaixa melhor?</label>
-
-        <div class="grid">
-          <button *ngFor="let cat of categorias" (click)="formData.categoria = cat"
-            [class.selected]="formData.categoria === cat">
-            <span class="radio">
-              <span *ngIf="formData.categoria === cat" class="radio-dot"></span>
-            </span>
-
-            {{ cat }}
-          </button>
-        </div>
-      </div>
-
-      <!-- Público -->
-      <div class="field">
-        <label>Essa sugestão é voltada para qual público?</label>
-
-        <div class="grid">
-          <button *ngFor="let pub of publicos" (click)="formData.publico = pub"
-            [class.selected]="formData.publico === pub">
-            <span class="radio">
-              <span *ngIf="formData.publico === pub" class="radio-dot"></span>
-            </span>
-
-            {{ pub }}
-          </button>
-        </div>
-      </div>
-
-      <!-- Proximidade -->
-      <div class="field">
-        <label>Que tipo de proximidade se tem com esta vítima?</label>
-
-        <div class="grid">
-          <button *ngFor="let prox of proximidades" (click)="formData.proximidade = prox"
-            [class.selected]="formData.proximidade === prox">
-            <span class="radio">
-              <span *ngIf="formData.proximidade === prox" class="radio-dot"></span>
-            </span>
-
-            {{ prox }}
-          </button>
-        </div>
-      </div>
-
-      <!-- Objetivo -->
-      <div class="field">
-        <label>Qual é o objetivo principal dessa sugestão?</label>
-
-        <div class="grid">
-          <button *ngFor="let obj of objetivos" (click)="formData.objetivo = obj"
-            [class.selected]="formData.objetivo === obj">
-            <span class="radio">
-              <span *ngIf="formData.objetivo === obj" class="radio-dot"></span>
-            </span>
-
-            {{ obj }}
-          </button>
-        </div>
-      </div>
-
-      <!-- Botões -->
-      <div class="actions">
-        <button class="btn-secondary" (click)="handleReset()">Voltar</button>
-
-        <button class="btn-primary" (click)="handleSubmit()">Enviar Ideia</button>
-      </div>
-    </div>
-  </div>
   <div *ngIf="bodyCalendario" class="bodyCalendario">
     <!-- Banner -->
-    <div class="banner">
-      <div class="banner-shape">
-        <div class="mountain-left"></div>
-        <div class="mountain-right"></div>
-        <div class="moon"></div>
-      </div>
-    </div>
+    
 
     <div class="content">
 
@@ -170,9 +55,10 @@
         </div>
 
         <!-- Botão Sugestão -->
-        <button class="btn-sugestao" (click)="MeusEncontrosJaneiro()">
-          💡Clique aqui Para Avançar
+        <button class="btn-sugestao" (click)="saibaMais()">
+          clique aqui e saiba mais 
         </button>
+   
 
       </div>
     </div>

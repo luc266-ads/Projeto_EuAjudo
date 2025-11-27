@@ -1,0 +1,207 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 7</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="page">
+
+    <!-- Notificação de confirmação -->
+    <div class="toast" *ngIf="mostrarConfirmacao">
+      <div class="toast-inner">
+        <div class="icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <div>
+          <div class="title">Presença Confirmada!</div>
+          <div class="subtitle">Você receberá um lembrete por email</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <h1>Eventos e Campanhas Sociais</h1>
+      <p>Participe de iniciativas que promovem o uso consciente da tecnologia e combatem a dependência virtual</p>
+    </header>
+
+    <!-- Lista -->
+    <main class="container">
+      <div class="grid">
+        <article class="card" *ngFor="let evento of eventos">
+          <div class="card-top" [ngClass]="getCorTipo(evento.tipo)">
+            <div class="card-top-left">
+              <h3>{{ evento.titulo }}</h3>
+              <span class="badge">{{ evento.tipo }}</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <!-- data -->
+            <div class="row">
+              <div class="row-left"><ion-icon name="calendar-outline"></ion-icon></div>
+              <div class="row-right">
+                <small>Data</small>
+                <div class="bold">{{ evento.data }}</div>
+              </div>
+            </div>
+
+            <!-- horário -->
+            <div class="row">
+              <div class="row-left"><ion-icon name="time-outline"></ion-icon></div>
+              <div class="row-right">
+                <small>Horário</small>
+                <div class="bold">{{ evento.horario }}</div>
+              </div>
+            </div>
+
+            <!-- responsável -->
+            <div class="row">
+              <div class="row-left"><ion-icon name="person-outline"></ion-icon></div>
+              <div class="row-right">
+                <small>Responsável</small>
+                <div class="bold">{{ evento.responsavel }}</div>
+              </div>
+            </div>
+
+            <!-- local -->
+            <div class="row">
+              <div class="row-left"><ion-icon name="map-outline"></ion-icon></div>
+              <div class="row-right">
+                <small>Local</small>
+                <div class="bold">{{ evento.endereco }}</div>
+              </div>
+            </div>
+
+            <!-- vagas -->
+            <div class="vagas">
+              <div class="vagas-top">
+                <span>Vagas Disponíveis</span>
+                <span class="bold">{{ vagasDisponiveis(evento) }} de {{ evento.vagas }}</span>
+              </div>
+              <div class="progress">
+                <div class="progress-bar" [style.width.%]="percentualOcupacao(evento)"></div>
+              </div>
+            </div>
+
+            <!-- botões -->
+            <div class="actions">
+              <button class="btn neutral" (click)="abrirDetalhes(evento)">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                Ver Detalhes
+              </button>
+
+              <button *ngIf="presencasMarcadas.includes(evento.id); else marcarBtn" class="btn confirm"
+                (click)="desmarcarPresenca(evento.id)">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                Presença Confirmada
+              </button>
+
+              <ng-template #marcarBtn>
+                <button class="btn primary" (click)="marcarPresenca(evento.id)">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  Marcar Presença
+                </button>
+              </ng-template>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- Modal de detalhes -->
+    <div class="modal-backdrop" *ngIf="eventoSelecionado">
+      <div class="modal">
+        <div class="modal-top" [ngClass]="getCorTipo(eventoSelecionado.tipo)">
+          <button class="close" (click)="fecharDetalhes()"><ion-icon name="close-outline"></ion-icon></button>
+          <div class="modal-badge">{{ eventoSelecionado.tipo }}</div>
+          <h2>{{ eventoSelecionado.titulo }}</h2>
+        </div>
+
+        <div class="modal-body">
+          <h3><ion-icon name="information-circle-outline"></ion-icon> Descrição do Evento</h3>
+          <p class="descricao">{{ eventoSelecionado.descricao }}</p>
+
+          <div class="grid-2">
+            <div class="card-small">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <div>
+                <small>Data</small>
+                <div class="bold">{{ eventoSelecionado.data }}</div>
+              </div>
+            </div>
+
+            <div class="card-small">
+              <ion-icon name="time-outline"></ion-icon>
+              <div>
+                <small>Horário</small>
+                <div class="bold">{{ eventoSelecionado.horario }}</div>
+              </div>
+            </div>
+
+            <div class="card-small">
+              <ion-icon name="person-outline"></ion-icon>
+              <div>
+                <small>Responsável</small>
+                <div class="bold">{{ eventoSelecionado.responsavel }}</div>
+              </div>
+            </div>
+
+            <div class="card-small">
+              <ion-icon name="map-outline"></ion-icon>
+              <div>
+                <small>Local</small>
+                <div class="bold">{{ eventoSelecionado.endereco }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="presencasMarcadas.includes(eventoSelecionado.id)" class="confirmed">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <div>
+              <div class="bold">Sua presença está confirmada!</div>
+              <div class="muted">Você receberá um lembrete por email</div>
+              <button class="btn neutral mt" (click)="desmarcarPresenca(eventoSelecionado.id)">Desmarcar
+                Presença</button>
+            </div>
+          </div>
+
+          <div *ngIf="!presencasMarcadas.includes(eventoSelecionado.id)">
+            <button class="btn big" (click)="  marcarPresenca(eventoSelecionado.id); fecharDetalhes();  ">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              Confirmar Presença
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <br>
+  <br>
+  <!-- FOOTER NAVEGAÇÃO-->
+  <footer class="footer">
+    <!-- MENU -->
+    <div class="footer-content">
+
+
+      <!-- NAVEGAÇÃO -->
+      <nav class="menu">
+        <button *ngFor="let item of menuItems" (click)="handleMenuClick(item.id)" [ngClass]="{
+            'ativo': menuAtivo === item.id && item.id !== 'sair',
+            'sair': item.id === 'sair'
+          }">
+          <ion-icon [name]="item.icone"></ion-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </nav>
+
+      <div class="espaco"></div>
+    </div>
+
+    <div class="barra"></div>
+  </footer>
+
+
+</ion-content>

@@ -33,6 +33,10 @@ const routes: Routes = [
         loadChildren: () => import('../sugestao/tab6.module').then(m => m.Tab6PageModule)
       },
       {
+        path: 'tab7',
+        loadChildren: () => import('../saibaMaisCalendario/tab7.module').then(m => m.Tab7PageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

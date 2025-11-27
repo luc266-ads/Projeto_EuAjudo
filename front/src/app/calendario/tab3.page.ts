@@ -292,6 +292,7 @@ export class Tab3Page {
   currentMonth = 0; // Janeiro
   selectedDates: string[] = [];
 
+
   meses = [
     'JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO',
     'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'
@@ -303,6 +304,10 @@ export class Tab3Page {
     const diasPorMes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     return diasPorMes[mes];
   }
+   
+  saibaMais(){
+  this.router.navigate(['/tabs/tab7']);
+}
 
   getPrimeiroDiaSemana(mes: number) {
     const ano = 2025;
@@ -343,7 +348,6 @@ export class Tab3Page {
   mesAnterior() {
     this.currentMonth = (this.currentMonth - 1 + 12) % 12;
   }
-
 
 
 

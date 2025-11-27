@@ -22,8 +22,8 @@ export class Tab5Page {
 
 
   Avancar() {
-  this.router.navigate(['/tabs/tab4']);
-  
+    this.router.navigate(['/tabs/tab4']);
+
   }
   EncontroLeft() {
     this.menuEncontro = !this.menuEncontro;
@@ -70,10 +70,10 @@ export class Tab5Page {
     {
       id: 'cvv',
       nome: 'CVV',
+      icone01: "heart",
       titulo: 'Centro de Valorização da Vida',
       cor: 'red',
       gradiente: 'gradiente-vermelho',
-      icone: 'heart',
       resumo: 'Apoio emocional e prevenção ao suicídio',
       telefone: '188',
       descricao:
@@ -101,10 +101,10 @@ export class Tab5Page {
     {
       id: 'caps',
       nome: 'CAPS',
+      icone01: "help-buoy-outline",
       titulo: 'Centro de Atenção Psicossocial',
       cor: 'emerald',
       gradiente: 'gradiente-verde',
-      icone: 'users',
       resumo: 'Atendimento integral em saúde mental pelo SUS',
       telefone: 'Varia por região',
       descricao: 'Serviço público do SUS para atendimento...',
@@ -131,10 +131,10 @@ export class Tab5Page {
     {
       id: 'clinica',
       nome: 'Clínica Escola',
+      icone01: "school-outline",
       titulo: 'Clínica-Escola de Psicologia',
       cor: 'blue',
       gradiente: 'gradiente-azul',
-      icone: 'brain',
       resumo: 'Atendimento psicológico acessível em universidades',
       telefone: 'Varia por instituição',
       descricao: 'Serviços de psicologia oferecidos por universidades...',

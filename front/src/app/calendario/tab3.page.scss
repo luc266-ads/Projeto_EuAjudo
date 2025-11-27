@@ -1,5 +1,5 @@
 .container {
-    
+
     min-height: 100vh;
     padding: 16px;
     animation: aparecer 0.9s ease-in-out;
@@ -125,6 +125,7 @@
 .bodyCalendario {
     animation: aparecer 0.9s ease-in-out;
     background: linear-gradient(to top, #1565c0, #2196f3);
+    height: 100%;
     width: 100%;
 }
 
@@ -177,11 +178,12 @@
 }
 
 
-hr{
-background-color: white;
-height: 5px;
+hr {
+    background-color: white;
+    height: 5px;
 
 }
+
 :host {
     display: block;
     padding: 16px;
@@ -450,51 +452,7 @@ height: 5px;
     }
 }
 
-/* BANNER */
-.banner {
-    padding: 30px;
-    background: linear-gradient(to bottom right, #42a5f5, #1e88e5);
 
-    .banner-shape {
-        background: linear-gradient(to bottom right, #424242, #212121);
-        height: 180px;
-        border-radius: 100px;
-        position: relative;
-        overflow: hidden;
-        margin: auto;
-
-        .mountain-left {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 70%;
-            height: 70%;
-            background: #616161;
-            border-radius: 0 100% 0 0;
-        }
-
-        .mountain-right {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 50%;
-            height: 50%;
-            background: #757575;
-            border-radius: 100% 0 0 0;
-        }
-
-        .moon {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            width: 60px;
-            height: 60px;
-            background: #eee;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, .7);
-        }
-    }
-}
 
 /* CARD */
 .content {
@@ -673,82 +631,82 @@ height: 5px;
 }
 
 ////////// FOOTER //////////
- .grid {
+.grid {
     display: grid;
     gap: 15px;
     margin-top: 15px;
 
     @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-  }
+}
 
-  .sample-card {
+.sample-card {
     padding: 20px;
     border-radius: 12px;
     border: 2px solid #c8e6ff;
     background: #e9f5ff;
-  }
+}
 
 
 /* FOOTER */
 .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #fff;
-  border-top: 2px solid #c8e6ff;
-  box-shadow: 0 -6px 20px rgba(0,0,0,0.1);
-  z-index: 999;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 2px solid #c8e6ff;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.1);
+    z-index: 999;
 }
 
 /* MENU */
 .menu {
-  display: flex;
-  gap: 10px;
-  flex: 1;
-  justify-content: center;
-
-  @media (min-width: 992px) {
-    justify-content: center;
-  }
-
-  button {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 14px;
-    border-radius: 12px;
-    border: none;
-    background: transparent;
-    transition: 0.3s;
-    color: #555;
+    gap: 10px;
+    flex: 1;
+    justify-content: center;
 
-    &.ativo {
-      background: linear-gradient(90deg, #3b82f6, #06b6d4);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    @media (min-width: 992px) {
+        justify-content: center;
     }
 
-    &.sair:hover {
-      background: #ffe8e8;
-      color: #d9534f;
-    }
+    button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 14px;
+        border-radius: 12px;
+        border: none;
+        background: transparent;
+        transition: 0.3s;
+        color: #555;
 
-    &:hover:not(.ativo):not(.sair) {
-      background: #e8f3ff;
-      color: #2563eb;
-    }
+        &.ativo {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
 
-    ion-icon {
-      font-size: 20px;
+        &.sair:hover {
+            background: #ffe8e8;
+            color: #d9534f;
+        }
+
+        &:hover:not(.ativo):not(.sair) {
+            background: #e8f3ff;
+            color: #2563eb;
+        }
+
+        ion-icon {
+            font-size: 20px;
+        }
     }
-  }
 }
 
 /* BARRA COLORIDA */
 .barra {
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
 }
