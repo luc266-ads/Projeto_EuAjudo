@@ -149,10 +149,5 @@ app.delete("/api/questionario/:id", async (req, res) => {
 // SERVIDOR
 // -----------------------------
 
-const PORT = 3000;
-app.listen(process.env.PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/usuarios`);
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/sugestoes`);
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}/api/questionario`);
 
-});
+app.listen(process.env.PORT || 3000)
