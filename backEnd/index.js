@@ -5,9 +5,7 @@ const pool = require('./db'); // <-- conexão com NEON
 const app = express();
 
 
-app.use(cors({
-  origin: "https://projeto-eu-ajudo-119wuyh1c-lucas-s-projects-534282d6.vercel.app"
-}));
+app.use(cors({}));
 app.use(express.json());
 
 // -----------------------------
