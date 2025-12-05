@@ -15,7 +15,7 @@ app.use(express.json());
 // -----------------------------
 
 // GET - listar usuários
-app.get("https://projetoeuajudo-production.up.railway.app/api/usuarios", async (req, res) => {
+app.get("/api/usuarios", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM usuarios ORDER BY id DESC");
     res.json(result.rows);
@@ -25,7 +25,7 @@ app.get("https://projetoeuajudo-production.up.railway.app/api/usuarios", async (
 });
 
 // POST - criar usuário
-app.post("https://projetoeuajudo-production.up.railway.app/api/usuarios", async (req, res) => {
+app.post("/api/usuarios", async (req, res) => {
   const { nome, email, senha, cpf } = req.body;
 
   if (!nome || !email || !senha || !cpf) {
@@ -46,7 +46,7 @@ app.post("https://projetoeuajudo-production.up.railway.app/api/usuarios", async 
 });
 
 // DELETE - excluir usuário
-app.delete("https://projetoeuajudo-production.up.railway.app/api/usuarios/:id", async (req, res) => {
+app.delete("/api/usuarios/:id", async (req, res) => {
   try {
     const result = await pool.query("DELETE FROM usuarios WHERE id = $1", [
       req.params.id,
