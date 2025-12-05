@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000' // coloque sua URL da API aqui
+  apiUrl: 'https://projetoeuajudo-production.up.railway.app' // coloque sua URL da API aqui
 };
 /*
  * For easier debugging in development mode, you can import the following file

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sua-api.com' // URL da API em produção
+  apiUrl: 'https://projetoeuajudo-production.up.railway.app' // URL da API em produção
 };
