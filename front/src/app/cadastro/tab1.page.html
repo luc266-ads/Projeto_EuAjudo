@@ -128,7 +128,9 @@
         <label>CPF</label>
         <div class="input-box">
           <ion-icon name="id-card-outline"></ion-icon>
-          <input type="email" [(ngModel)]="cpf"
+          <input 
+          mask="000.000.000-00"
+          type="email" [(ngModel)]="cpf"
           placeholder="000.000.000-00">
         </div>
 

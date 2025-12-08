@@ -2,6 +2,7 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "lucide": "^0.554.0",
+    "ngx-mask": "^20.0.3",
     "pg": "^8.16.3"
   }
 }
